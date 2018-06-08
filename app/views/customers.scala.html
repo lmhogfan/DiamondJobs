@@ -1,14 +1,23 @@
-@(customers: List[Customer])
+@(customers: List[CustomerDetail], searchCriteria: String)
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Employee</title>
+    <title>Customer Search</title>
+@bootstrap.render
 </head>
 <body>
+
+<form method="get">
+    <input type="text" name="searchCriteria" value="@searchCriteria">
+    <input type="submit" value="Search">
+</form>
 @for(customer <- customers){
-@customer.getFirstName
+<a href="customer/@customer.getCustomerId">@customer.getFirstName
 @customer.getLastName
+@customer.getAreaCode-
+@customer.getNumPrefix-
+@customer.getPhoneAddress
+</a>
 <br>
 }
 </body>

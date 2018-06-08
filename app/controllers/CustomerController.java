@@ -1,8 +1,6 @@
 package controllers;
 
-import models.Customer;
-import models.PhoneNumber;
-import models.State;
+import models.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -27,17 +25,33 @@ public class CustomerController extends Controller
     @Transactional(readOnly = true)
     public Result getCustomers()
     {
-        String sql="SELECT c FROM Customer c ";
-        List<Customer> customers= jpaApi.em().createQuery(sql,Customer.class).getResultList();
+        DynamicForm form=formFactory.form().bindFromRequest();
+        String searchCriteria=form.get("searchCriteria");
+        if (searchCriteria==null)
+        {
+            searchCriteria="";
+        }
+        String queryParameter="%"+searchCriteria+"%";
+        String sql="SELECT NEW models.CustomerDetail(c.customerId,c.lastName,c.firstName,p.areaCode,p.numPrefix,p.phoneAddress) "+
+                "FROM Customer c " +
+                "JOIN PhoneNumber p ON c.customerId = p.customerId "+
+                "WHERE c.firstName LIKE :searchCriteria "+
+                "OR c.lastName LIKE :searchCriteria "+
+                "OR CONCAT(p.areaCode,p.numPrefix,p.phoneAddress) LIKE :searchCriteria";
+        List<CustomerDetail> customers= jpaApi.em().createQuery(sql, CustomerDetail.class)
+                .setParameter("searchCriteria",queryParameter).getResultList();
 
-        return ok(views.html.customers.render(customers));
+        return ok(views.html.customers.render(customers,searchCriteria));
     }
 
     @Transactional
     public Result getNewCustomer()
     {
-        String stateSql="SELECT s FROM State s";
-        List<State> states=jpaApi.em().createQuery(stateSql,State.class).getResultList();
+        String stateSql="SELECT NEW models.CityState(s.stateId,s.state,c.city) "+
+                "FROM States s "+
+                "JOIN Cities c ON s.stateId=c.stateId "+
+                "GROUP BY s.stateId";
+        List<CityState> states=jpaApi.em().createQuery(stateSql, CityState.class).getResultList();
 
         return ok(views.html.newcustomer.render(states));
     }

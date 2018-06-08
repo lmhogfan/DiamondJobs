@@ -6,12 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class State
+public class States
 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String stateId;
 
-    private String stateName;
+    private String state;
 
     public String getStateId()
     {
@@ -20,11 +20,12 @@ public class State
 
     public String getStateName()
     {
-        return stateName;
+        return state;
     }
 
     public void setStateName(String stateName)
     {
-        this.stateName = stateName;
+        this.state = stateName;
     }
+
 }

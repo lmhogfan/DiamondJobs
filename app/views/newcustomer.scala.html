@@ -1,9 +1,9 @@
-@(states:List[State])
+@(cities:List[CityState])
 @import helper._
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    @bootstrap.render
     <title>New Customer</title>
 </head>
 <body>
@@ -19,10 +19,15 @@
     <br>
     Address: <input type="text" name="address" id="address" maxlength="40">
     <br>
-    City/State: <input type="text" name="city" id="city" maxlength="20">
+    City/State:
     <select name="stateId" id="stateId">
-        @for(state <-states){
-        <option>@state.getStateId</option>
+        @for(city <-cities){
+        <option>@city.getStateId</option>
+        }
+    </select>
+    <select name="city" id="city">
+        @for(city <- cities){
+        <option>@city.getCity</option>
         }
     </select>
     <br>
