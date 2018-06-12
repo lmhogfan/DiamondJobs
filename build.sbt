@@ -17,6 +17,10 @@ libraryDependencies +="org.mariadb.jdbc" % "mariadb-java-client" % "2.2.5"
 
 libraryDependencies += "org.webjars" % "bootstrap" % "4.1.0"
 
+
+
+
+
 // Test Database
 libraryDependencies += "com.h2database" % "h2" % "1.4.196"
 

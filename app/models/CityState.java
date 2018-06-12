@@ -9,14 +9,14 @@ public class CityState
     @Id
     private String stateId;
     private String state;
-    private String City;
+    private String city;
 
 
     public CityState(String stateId, String state, String city)
     {
         this.stateId = stateId;
         this.state = state;
-        City = city;
+        this.city = city;
     }
 
     public String getStateId()
@@ -36,11 +36,11 @@ public class CityState
 
     public String getCity()
     {
-        return City;
+        return city;
     }
 
     public void setCity(String city)
     {
-        City = city;
+        this.city = city;
     }
 }

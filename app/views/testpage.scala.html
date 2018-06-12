@@ -1,0 +1,28 @@
+@(states:List[CityState])
+@import helper._
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Code School</title>
+    @bootstrap.render
+</head>
+<body>
+<p>Want to learn to code? Well let's get started!</p>
+<p>Let's make a coding bat like site!</p>
+<form>
+    @CSRF.formField
+    <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
+            data-url="new/cities" data-replacement="container1">
+        <option value="">Select State</option>
+        @for(state <- states){
+        <option>@state.getStateId</option>
+        }
+    </select>
+    <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
+             data-replacement="container1" data-default-label="Select City" disabled>
+    </select>
+</form>
+<script type="text/javascript" src="/assets/javascripts/cascading-drop-down.js"></script>
+</body>
+</html>

@@ -1,10 +1,12 @@
 package controllers;
 
+import json.DropDown;
 import models.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -54,6 +56,28 @@ public class CustomerController extends Controller
         List<CityState> states=jpaApi.em().createQuery(stateSql, CityState.class).getResultList();
 
         return ok(views.html.newcustomer.render(states));
+    }
+
+    @Transactional
+    public Result getCities()
+    {
+        DynamicForm form=formFactory.form().bindFromRequest();
+        String state=form.get("stateId");
+
+        DropDown.Menu[] cities;
+        String stateSql="SELECT c FROM Cities c "+
+                "WHERE stateId= :stateId";
+        List<Cities> citiesList=jpaApi.em().createQuery(stateSql, Cities.class).setParameter("stateId",state).getResultList();
+        cities= new DropDown.Menu[citiesList.size()];
+
+        for (int i=0; i<citiesList.size(); i++)
+        {
+            cities[i] = new DropDown.Menu(citiesList.get(i).getCity(), citiesList.get(i).getCity());
+        }
+
+        DropDown dropDown= new DropDown(true,"notused",cities);
+
+        return ok(Json.toJson(dropDown));
     }
 
     @Transactional
