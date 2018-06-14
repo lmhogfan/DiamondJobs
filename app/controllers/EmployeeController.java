@@ -2,6 +2,7 @@ package controllers;
 
 import models.Employee;
 import models.EmployeeTitle;
+import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
@@ -37,5 +38,33 @@ public class EmployeeController extends Controller
         String sql= "SELECT et FROM EmployeeTitle et";
         List<EmployeeTitle> employeeTitles=jpaApi.em().createQuery(sql,EmployeeTitle.class).getResultList();
         return ok(views.html.newemployee.render(employeeTitles));
+    }
+
+    @Transactional
+    public Result postNewEmployee()
+    {
+        DynamicForm form=formFactory.form().bindFromRequest();
+
+        String userName=form.get("userName");
+        String password=form.get("password");
+        String firstName=form.get("firstName");
+        String lastName=form.get("lastName");
+        String email=form.get("email");
+        String phoneNumber=form.get("phoneNumber");
+        int title=Integer.parseInt(form.get("employeeTitleId"));
+
+        Employee employee=new Employee();
+
+        employee.setUserName(userName);
+        employee.setPassword(password);
+        employee.setFirstName(firstName);
+        employee.setLastName(lastName);
+        employee.setEmail(email);
+        employee.setPhoneNumber(phoneNumber);
+        employee.setEmployeeTitleId(title);
+
+        jpaApi.em().persist(employee);
+
+        return ok("Employee saved as id: "+employee.getEmployeeId());
     }
 }

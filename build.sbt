@@ -17,8 +17,7 @@ libraryDependencies +="org.mariadb.jdbc" % "mariadb-java-client" % "2.2.5"
 
 libraryDependencies += "org.webjars" % "bootstrap" % "4.1.0"
 
-
-
+libraryDependencies += "org.webjars" % "jquery" % "3.3.1"
 
 
 // Test Database

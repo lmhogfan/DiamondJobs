@@ -1,0 +1,17 @@
+@(repair: Repair)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Repair</title>
+    @bootstrap.render
+</head>
+<body>
+@repair.getRepairsId
+@repair.getCustomerId
+@repair.getItemDescription
+@repair.getJobStarted
+<br>
+
+</body>
+</html>

@@ -8,17 +8,18 @@
     @bootstrap.render
 </head>
 <body>
-<form>
+<form method="post">
     @CSRF.formField
     User Name:<input type="text" name="userName" maxlength="20"><br>
+    Password:<input type="password" name="password" maxlength="20"><br>
     First Name:<input type="text" name="firstName" maxlength="20"><br>
     Last Name:<input type="text" name="lastName" maxlength="20"><br>
     E-mail:<input type="text" name="email" maxlength="40"><br>
     Phone Number:<input type="text" name="phoneNumber" maxlength="12"><br>
     Employee Title:
-    <select>
+    <select name="employeeTitleId">
         @for(employeeTitle <- employeeTitles){
-         <option>@employeeTitle.getEmployeeTitleName</option>
+         <option value="@employeeTitle.getEmployeeTitleId">@employeeTitle.getEmployeeTitleName</option>
         }
     </select><br>
     <input type="submit" class="btn btn-primary" value="Save">

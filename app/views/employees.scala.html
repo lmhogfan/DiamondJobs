@@ -3,11 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    @bootstrap.render
     <title>Title</title>
 </head>
 <body>
 @for(employee <- employees){
-@employee.getFirstName @employee.getLastName
+@employee.getFirstName @employee.getLastName @employee.getUserName
+<br>
 }
 </body>
 </html>

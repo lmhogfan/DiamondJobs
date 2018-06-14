@@ -1,4 +1,4 @@
-@(states:List[CityState])
+@(customers: List[Customer])
 @import helper._
 <!DOCTYPE html>
 <html lang="en">
@@ -6,23 +6,40 @@
     <meta charset="UTF-8">
     <title>Welcome to Code School</title>
     @bootstrap.render
+    <link rel="stylesheet" href="/assets/stylesheets/jquery.dataTables.min.css">
 </head>
-<body>
-<p>Want to learn to code? Well let's get started!</p>
-<p>Let's make a coding bat like site!</p>
-<form>
-    @CSRF.formField
-    <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
-            data-url="new/cities" data-replacement="container1">
-        <option value="">Select State</option>
-        @for(state <- states){
-        <option>@state.getStateId</option>
-        }
-    </select>
-    <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
-             data-replacement="container1" data-default-label="Select City" disabled>
-    </select>
-</form>
-<script type="text/javascript" src="/assets/javascripts/cascading-drop-down.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-8">
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for(customer <-customers){
+    <tr>
+        <td>@customer.getFirstName</td>
+        <td>@customer.getLastName</td>
+        <td>@customer.getAddress</td>
+        <td>@customer.getCity</td>
+        <td>@customer.getStateId</td>
+    </tr>
+    }
+    </tbody>
+</table>
+            <button class="btn btn-primary" id="button">Count</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/assets/javascripts/dataTables.js"></script>
 </body>
 </html>

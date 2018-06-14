@@ -12,10 +12,12 @@ public class Employee
     private int employeeId;
 
     private String userName;
+    private String password;
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
+    private int employeeTitleId;
 
     public int getEmployeeId()
     {
@@ -70,5 +72,25 @@ public class Employee
     public void setPhoneNumber(String phoneNumber)
     {
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getEmployeeTitleId()
+    {
+        return employeeTitleId;
+    }
+
+    public void setEmployeeTitleId(int employeeTitleId)
+    {
+        this.employeeTitleId = employeeTitleId;
+    }
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
     }
 }

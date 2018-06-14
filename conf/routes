@@ -16,6 +16,14 @@ GET     /employees                  controllers.EmployeeController.getEmployees
 GET     /test                       controllers.HomeController.getTestPage
 GET     /newCustomer/cities         controllers.CustomerController.getCities
 GET     /newEmployee                controllers.EmployeeController.getNewEmployee
+POST    /newEmployee                controllers.EmployeeController.postNewEmployee
+GET     /newrepairs                 controllers.JobController.getRepairs
+GET     /customs                    controllers.JobController.getCustoms
+GET     /newRepair/:id              controllers.JobController.getNewRepair(id:Integer)
+POST    /newRepair/:id              controllers.JobController.postNewRepair(id:Integer)
+GET     /repairs                    controllers.JobController.getRepairTools
+GET     /updaterepairs              controllers.JobController.updateRepairs
+GET     /updaterepair/:id           controllers.JobController.updateRepair(id:Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

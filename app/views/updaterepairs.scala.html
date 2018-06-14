@@ -1,0 +1,26 @@
+@(repairs:List[RepairUpdate])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Repairs</title>
+    @bootstrap.render
+</head>
+<body>
+<h1 class="display-4">Update Repairs</h1>
+Choose a repair to update:
+<table class="table table-hover">
+    <th>Customer</th><th>Description</th><th>Status</th><th>Repair Started</th>
+    @for(repair <- repairs){
+    <tr class='clickable-row' data-href='/updaterepair/@repair.getRepairsId'>
+        <td>@repair.getFirstName @repair.getLastName</td>
+        <td>@repair.getItemDescription</td>
+        <td>@repair.getRepairStatusName</td>
+        <td>@repair.getJobStarted</td>
+    </tr>
+    }
+</table>
+<script type="text/javascript" src="assets/javascripts/selectable-table.js"></script>
+
+</body>
+</html>
