@@ -18,10 +18,12 @@ public class RepairUpdate
     private LocalDateTime jobStarted;
     private LocalDateTime statusChange;
     private String repairStatusName;
+    private LocalDateTime jobFinished;
 
 
-    public RepairUpdate(int customerId, int repairsId, String firstName, String lastName, String itemDescription, int envelopeNumber,
-                        LocalDateTime jobStarted, LocalDateTime statusChange, String repairStatusName)
+    public RepairUpdate(int customerId, int repairsId, String firstName, String lastName,
+                        String itemDescription, int envelopeNumber, LocalDateTime jobStarted,
+                        LocalDateTime statusChange, String repairStatusName,LocalDateTime jobFinished)
     {
         this.customerId = customerId;
         this.repairsId= repairsId;
@@ -32,6 +34,8 @@ public class RepairUpdate
         this.jobStarted = jobStarted;
         this.statusChange=statusChange;
         this.repairStatusName = repairStatusName;
+        this.jobFinished=jobFinished;
+
     }
 
     public int getRepairsId()
@@ -87,5 +91,20 @@ public class RepairUpdate
     public void setStatusChange(LocalDateTime statusChange)
     {
         this.statusChange = statusChange;
+    }
+
+    public void setJobStarted(LocalDateTime jobStarted)
+    {
+        this.jobStarted = jobStarted;
+    }
+
+    public LocalDateTime getJobFinished()
+    {
+        return jobFinished;
+    }
+
+    public void setJobFinished(LocalDateTime jobFinished)
+    {
+        this.jobFinished = jobFinished;
     }
 }

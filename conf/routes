@@ -22,8 +22,11 @@ GET     /customs                    controllers.JobController.getCustoms
 GET     /newRepair/:id              controllers.JobController.getNewRepair(id:Integer)
 POST    /newRepair/:id              controllers.JobController.postNewRepair(id:Integer)
 GET     /repairs                    controllers.JobController.getRepairTools
-GET     /updaterepairs              controllers.JobController.updateRepairs
-GET     /updaterepair/:id           controllers.JobController.updateRepair(id:Integer)
+GET     /updaterepairs              controllers.JobController.getUpdateRepairs
+GET     /updaterepair/:id           controllers.JobController.getUpdateRepair(id:Integer)
+POST    /updaterepair/:id           controllers.JobController.postUpdateRepair(id:Integer)
+GET     /completedrepairs           controllers.JobController.getCompletedRepairs
+GET     /repairhistory/:id          controllers.JobController.getRepairHistory(id:Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

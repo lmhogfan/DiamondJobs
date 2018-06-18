@@ -9,3 +9,5 @@ $(document).ready(function() {
 		alert( table.rows('.selected').data().length +' row(s) selected' );
 	} );
 } );
+
+//window.location = $(this).data("href")
