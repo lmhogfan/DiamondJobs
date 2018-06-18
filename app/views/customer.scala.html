@@ -6,13 +6,21 @@
     <title></title>
 </head>
 <body>
-<h1>Customer Detail</h1>
-<table>
-    <th>First Name</th><th>Last Name</th>
-    <tr>
-        <td>@customer.getFirstName</td>
-        <td>@customer.getLastName</td>
-    </tr>
-</table>
+<div class="container">
+    <h1>@customer.getFirstName @customer.getLastName</h1>
+    @customer.getAddress<br>
+    @customer.getCity, @customer.getStateId @customer.getZipCode<br>
+    @customer.getEmail
+    <br>
+    <br>
+    <br>
+    Customer Notes:<br>
+    @customer.getNotes
+    <br><br>
+    <a href="../editcustomer/@customer.getCustomerId"  class="btn btn-primary" role="button">Edit Customer</a>
+    <a href="../newRepair/@customer.getCustomerId" class="btn btn-primary" role="button">New Repair</a>
+    <a href="../repairhistory/@customer.getCustomerId"  class="btn btn-primary" role="button">Repair History</a>
+</div>
+
 </body>
 </html>

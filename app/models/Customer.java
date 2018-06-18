@@ -18,6 +18,7 @@ public class Customer
     private String stateId;
     private String email;
     private String notes;
+    private String zipCode;
 
     public int getCustomerId()
     {
@@ -92,5 +93,15 @@ public class Customer
     public void setNotes(String notes)
     {
         this.notes = notes;
+    }
+
+    public String getZipCode()
+    {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode)
+    {
+        this.zipCode = zipCode;
     }
 }

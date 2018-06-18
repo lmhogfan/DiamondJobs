@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    var table = $('#example').DataTable( );
+    var table = $('#test').DataTable( );
 
-	$('#example tbody').on( 'click', 'tr', function () {
+	$('#test tbody').on( 'click', 'tr', function () {
 		$(this).toggleClass('selected');
 	} );
 

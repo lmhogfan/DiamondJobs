@@ -204,7 +204,18 @@ public class JobController extends Controller
     @Transactional (readOnly = true)
     public Result getRepairHistory(Integer customerId)
     {
-        return ok();
+        String sql= "SELECT NEW models.RepairHistory(r.customerId, rs.repairStatusId, rsd.repairStatusCode, " +
+                "rsd.repairStatusName, rs.statusChange, r.repairsId, c.firstName, c.lastName, rs.notes) " +
+                "FROM RepairStatus rs "+
+                "JOIN Repair r ON rs.repairStatusId=r.repairStatusId "+
+                "JOIN RepairStatusDetail rsd ON rs.repairStatusCode=rsd.repairStatusCode "+
+                "JOIN Customer c ON r.customerId=c.customerId "+
+                "WHERE r.customerId= :customerId "+
+                "ORDER BY c.lastName,c.firstName";
+        List <RepairHistory> repairHistory=jpaApi.em().createQuery(sql,RepairHistory.class)
+                .setParameter("customerId",customerId).getResultList();
+
+        return ok(views.html.repairhistory.render(repairHistory));
     }
 
 }

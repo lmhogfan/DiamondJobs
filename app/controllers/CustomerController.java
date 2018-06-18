@@ -94,6 +94,7 @@ public class CustomerController extends Controller
         String stateId=form.get("stateId");
         String email=form.get("email");
         String notes=form.get("notes");
+        String zipcode=form.get("zipCode");
 
         Customer customer=new Customer();
         customer.setFirstName(firstName);
@@ -103,6 +104,7 @@ public class CustomerController extends Controller
         customer.setStateId(stateId);
         customer.setEmail(email);
         customer.setNotes(notes);
+        customer.setZipCode(zipcode);
         jpaApi.em().persist(customer);
 
         PhoneNumber phoneNumber=new PhoneNumber();
