@@ -14,6 +14,7 @@ libraryDependencies +=javaJpa
 libraryDependencies +=javaJdbc
 libraryDependencies +="org.hibernate" % "hibernate-core" % "5.3.1.Final"
 libraryDependencies +="org.mariadb.jdbc" % "mariadb-java-client" % "2.2.5"
+libraryDependencies += "com.amazonaws" % "aws-java-sdk" % "1.11.351"
 
 libraryDependencies += "org.webjars" % "bootstrap" % "4.1.0"
 

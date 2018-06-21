@@ -1,6 +1,9 @@
 package controllers;
 
-import models.*;
+import models.CustomerModels.Customer;
+import models.CustomerModels.CustomerDetail;
+import models.EmployeeModels.Employee;
+import models.RepairModels.*;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -27,7 +30,7 @@ public class JobController extends Controller
     @Transactional(readOnly = true)
     public Result getRepairTools()
     {
-        return ok(views.html.repairoptions.render());
+        return ok(views.html.RepairViews.repairoptions.render());
     }
 
     @Transactional(readOnly = true)
@@ -40,7 +43,7 @@ public class JobController extends Controller
             searchCriteria = "";
         }
         String queryParameter = "%" + searchCriteria + "%";
-        String sql = "SELECT NEW models.CustomerDetail(c.customerId,c.lastName,c.firstName,p.areaCode,p.numPrefix,p.phoneAddress) " +
+        String sql = "SELECT NEW models.CustomerModels.CustomerDetail(c.customerId,c.lastName,c.firstName,p.areaCode,p.numPrefix,p.phoneAddress) " +
                 "FROM Customer c " +
                 "JOIN PhoneNumber p ON c.customerId = p.customerId " +
                 "WHERE c.firstName LIKE :searchCriteria " +
@@ -49,13 +52,13 @@ public class JobController extends Controller
         List<CustomerDetail> customers = jpaApi.em().createQuery(sql, CustomerDetail.class)
                 .setParameter("searchCriteria", queryParameter).getResultList();
 
-        return ok(views.html.repairs.render(customers, searchCriteria));
+        return ok(views.html.RepairViews.repairs.render(customers, searchCriteria));
     }
 
     @Transactional
     public Result getCustoms()
     {
-        return ok(views.html.customs.render());
+        return ok(views.html.CustomsViews.customs.render());
     }
 
     @Transactional(readOnly = true)
@@ -71,7 +74,7 @@ public class JobController extends Controller
 
         String userlist = "SELECT e FROM Employee e";
         List<Employee> employees = jpaApi.em().createQuery(userlist, Employee.class).getResultList();
-        return ok(views.html.newrepair.render(customer, repairStatusDetails, employees));
+        return ok(views.html.RepairViews.newrepair.render(customer, repairStatusDetails, employees));
     }
 
     @Transactional
@@ -113,7 +116,7 @@ public class JobController extends Controller
     @Transactional(readOnly = true)
     public Result getUpdateRepairs()
     {
-        String sql = "SELECT NEW models.RepairUpdate(c.customerId,r.repairsId, c.firstName,c.lastName,r.itemDescription," +
+        String sql = "SELECT NEW models.RepairModels.RepairUpdate(c.customerId,r.repairsId, c.firstName,c.lastName,r.itemDescription," +
                 "r.envelopeNumber, r.jobStarted, rs.statusChange, rsd.repairStatusName, r.jobFinished) " +
                 "FROM Customer c " +
                 "JOIN Repair r ON c.customerId=r.customerId " +
@@ -122,14 +125,14 @@ public class JobController extends Controller
                 "WHERE rs.repairStatusCode=1 OR rs.repairStatusCode=2 OR rs.repairStatusCode=3 " +
                 "ORDER BY rsd.repairStatusName";
         List<RepairUpdate> repairUpdates = jpaApi.em().createQuery(sql, RepairUpdate.class).getResultList();
-        return ok(views.html.updaterepairs.render(repairUpdates));
+        return ok(views.html.RepairViews.updaterepairs.render(repairUpdates));
     }
 
     @Transactional(readOnly = true)
     public Result getUpdateRepair(Integer repairsId)
     {
 
-        String job = "SELECT NEW models.RepairUpdate(c.customerId,r.repairsId, c.firstName,c.lastName,r.itemDescription," +
+        String job = "SELECT NEW models.RepairModels.RepairUpdate(c.customerId,r.repairsId, c.firstName,c.lastName,r.itemDescription," +
                 "r.envelopeNumber, r.jobStarted, rs.statusChange, rsd.repairStatusName, r.jobFinished) " +
                 "FROM Customer c " +
                 "JOIN Repair r ON c.customerId=r.customerId " +
@@ -147,7 +150,7 @@ public class JobController extends Controller
         String userlist = "SELECT e FROM Employee e";
         List<Employee> employees = jpaApi.em().createQuery(userlist, Employee.class).getResultList();
 
-        return ok(views.html.updaterepair.render(repairUpdate, repairStatusDetails, employees));
+        return ok(views.html.RepairViews.updaterepair.render(repairUpdate, repairStatusDetails, employees));
     }
 
     @Transactional
@@ -179,17 +182,17 @@ public class JobController extends Controller
         {
             repair.setJobFinished(LocalDateTime.now());
             jpaApi.em().persist(repair);
-            return ok("Job finished at " + repair.getJobFinished());
+            return redirect(routes.JobController.getUpdateRepairs());
         } else
         {
-            return ok("Job status change: " + repairStatus.getRepairStatusId());
+            return redirect(routes.JobController.getUpdateRepairs());
         }
     }
 
     @Transactional
     public Result getCompletedRepairs()
     {
-        String sql = "SELECT NEW models.RepairUpdate(c.customerId,r.repairsId, c.firstName,c.lastName,r.itemDescription," +
+        String sql = "SELECT NEW models.RepairModels.RepairUpdate(c.customerId,r.repairsId, c.firstName,c.lastName,r.itemDescription," +
                 "r.envelopeNumber, r.jobStarted, rs.statusChange, rsd.repairStatusName, r.jobFinished) " +
                 "FROM Customer c " +
                 "JOIN Repair r ON c.customerId=r.customerId " +
@@ -198,24 +201,51 @@ public class JobController extends Controller
                 "WHERE rs.repairStatusCode=4 " +
                 "ORDER BY c.lastName,c.firstName";
         List<RepairUpdate> repairUpdates = jpaApi.em().createQuery(sql, RepairUpdate.class).getResultList();
-        return ok(views.html.completedrepairs.render(repairUpdates));
+        return ok(views.html.RepairViews.completedrepairs.render(repairUpdates));
     }
 
     @Transactional (readOnly = true)
     public Result getRepairHistory(Integer customerId)
     {
-        String sql= "SELECT NEW models.RepairHistory(r.customerId, rs.repairStatusId, rsd.repairStatusCode, " +
-                "rsd.repairStatusName, rs.statusChange, r.repairsId, c.firstName, c.lastName, rs.notes) " +
+        String sql= "SELECT NEW models.RepairModels.RepairHistory(r.customerId, rs.repairStatusId, rsd.repairStatusCode, " +
+                "rsd.repairStatusName, rs.statusChange, r.repairsId, c.firstName, c.lastName, rs.notes, r.itemDescription, e.userName) " +
                 "FROM RepairStatus rs "+
                 "JOIN Repair r ON rs.repairStatusId=r.repairStatusId "+
                 "JOIN RepairStatusDetail rsd ON rs.repairStatusCode=rsd.repairStatusCode "+
                 "JOIN Customer c ON r.customerId=c.customerId "+
+                "JOIN Employee e ON rs.employeeId=e.employeeId "+
                 "WHERE r.customerId= :customerId "+
-                "ORDER BY c.lastName,c.firstName";
+                "GROUP BY rs.repairStatusId";
         List <RepairHistory> repairHistory=jpaApi.em().createQuery(sql,RepairHistory.class)
                 .setParameter("customerId",customerId).getResultList();
 
-        return ok(views.html.repairhistory.render(repairHistory));
+        return ok(views.html.RepairViews.repairhistory.render(repairHistory));
+    }
+
+    @Transactional (readOnly = true)
+    public Result getRepairDetail(Integer repairsId)
+    {
+        String sql= "SELECT NEW models.RepairModels.RepairHistory(r.customerId, rs.repairStatusId, rsd.repairStatusCode, " +
+                "rsd.repairStatusName, rs.statusChange, r.repairsId, c.firstName, c.lastName, rs.notes, r.itemDescription, e.userName) " +
+                "FROM RepairStatus rs "+
+                "JOIN Repair r ON rs.repairStatusId=r.repairStatusId "+
+                "JOIN RepairStatusDetail rsd ON rs.repairStatusCode=rsd.repairStatusCode "+
+                "JOIN Customer c ON r.customerId=c.customerId "+
+                "JOIN Employee e ON rs.employeeId=e.employeeId "+
+                "WHERE rs.repairsId= :repairsId "+
+                "GROUP BY rs.repairStatusId";
+        RepairHistory repairHistory=jpaApi.em().createQuery(sql, RepairHistory.class)
+                .setParameter("repairsId",repairsId).getSingleResult();
+        String details="SELECT NEW models.RepairModels.RepairDetail(rs.repairStatusId, rs.repairStatusCode, rsd.repairStatusName, "+
+                "rs.statusChange, e.userName, rs.notes) "+
+                "FROM RepairStatus rs "+
+                "JOIN RepairStatusDetail rsd ON rs.repairStatusCode=rsd.repairStatusCode "+
+                "JOIN Employee e ON rs.employeeId=e.employeeId "+
+                "WHERE rs.repairsId= :repairsId "+
+                "GROUP BY rs.repairStatusId";
+        List<RepairDetail> repairDetails=jpaApi.em().createQuery(details,RepairDetail.class)
+                .setParameter("repairsId",repairsId).getResultList();
+        return ok(views.html.RepairViews.repairdetail.render(repairHistory,repairDetails));
     }
 
 }

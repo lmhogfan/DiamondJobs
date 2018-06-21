@@ -3,20 +3,25 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
-
+GET     /                           controllers.HomeController.getLogin
+POST    /                           controllers.HomeController.postLogin
+GET     /index                      controllers.HomeController.index
+GET     /manager                    controllers.HomeController.getManagerTools
+GET     /employeetools              controllers.HomeController.getEmployeeTools
+GET     /test                       controllers.HomeController.getTestPage
 
 GET     /customers                  controllers.CustomerController.getCustomers
 GET     /newCustomer                controllers.CustomerController.getNewCustomer
 POST    /newCustomer                controllers.CustomerController.postNewCustomer
 GET     /customer/:id               controllers.CustomerController.getCustomer(id:Integer)
-GET     /manager                    controllers.HomeController.getManagerTools
-GET     /employeetools              controllers.HomeController.getEmployeeTools
-GET     /employees                  controllers.EmployeeController.getEmployees
-GET     /test                       controllers.HomeController.getTestPage
+GET     /editcustomer/:id           controllers.CustomerController.getEditCustomer(id:Integer)
+POST    /editcustomer/:id           controllers.CustomerController.postEditCustomer(id:Integer)
 GET     /newCustomer/cities         controllers.CustomerController.getCities
+
+GET     /employees                  controllers.EmployeeController.getEmployees
 GET     /newEmployee                controllers.EmployeeController.getNewEmployee
 POST    /newEmployee                controllers.EmployeeController.postNewEmployee
+
 GET     /newrepairs                 controllers.JobController.getRepairs
 GET     /customs                    controllers.JobController.getCustoms
 GET     /newRepair/:id              controllers.JobController.getNewRepair(id:Integer)
@@ -27,6 +32,10 @@ GET     /updaterepair/:id           controllers.JobController.getUpdateRepair(id
 POST    /updaterepair/:id           controllers.JobController.postUpdateRepair(id:Integer)
 GET     /completedrepairs           controllers.JobController.getCompletedRepairs
 GET     /repairhistory/:id          controllers.JobController.getRepairHistory(id:Integer)
+GET     /repairdetail/:id           controllers.JobController.getRepairDetail(id:Integer)
+
+GET     /sendemail                  controllers.EmailController.getSendEmail
+POST    /sendemail                  controllers.EmailController.postSendEmail
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

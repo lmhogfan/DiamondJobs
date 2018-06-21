@@ -1,0 +1,25 @@
+@(repair:RepairModels.RepairHistory, statuses:List[RepairModels.RepairDetail])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Repair Details</title>
+    @bootstrap.render
+</head>
+<h1 class="display-4 text-center">Repair for @repair.getFirstName @repair.getLastName</h1>
+<h3 class="text-center">@repair.getItemDescription</h3>
+<body>
+<table class="table">
+    <th>Status</th><th>Notes</th><th>Time Updated</th><th>Employee</th>
+    @for(status <-statuses){
+    <tr>
+        <td>@status.getRepairStatusName</td>
+        <td>@status.getNotes</td>
+        <td>@status.getStatusChange</td>
+        <td>@repair.getUsername</td>
+    </tr>
+    }
+</table>
+
+</body>
+</html>

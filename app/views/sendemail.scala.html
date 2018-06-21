@@ -1,0 +1,15 @@
+@import helper._
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Email</title>
+</head>
+<body>
+<form method="post">
+    @CSRF.formField
+    <input type="submit" value="Send Email">
+</form>
+
+</body>
+</html>

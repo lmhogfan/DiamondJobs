@@ -1,7 +1,8 @@
 package controllers;
 
-import models.Employee;
-import models.EmployeeTitle;
+import models.EmployeeModels.Employee;
+import models.EmployeeModels.EmployeeTitle;
+import models.EmployeeModels.Password;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -29,7 +30,7 @@ public class EmployeeController extends Controller
     {
         String sql= "SELECT e FROM Employee e ";
         List<Employee>employees= jpaApi.em().createQuery(sql, Employee.class).getResultList();
-        return ok(views.html.employees.render(employees));
+        return ok(views.html.EmployeeViews.employees.render(employees));
     }
 
     @Transactional
@@ -37,7 +38,7 @@ public class EmployeeController extends Controller
     {
         String sql= "SELECT et FROM EmployeeTitle et";
         List<EmployeeTitle> employeeTitles=jpaApi.em().createQuery(sql,EmployeeTitle.class).getResultList();
-        return ok(views.html.newemployee.render(employeeTitles));
+        return ok(views.html.EmployeeViews.newemployee.render(employeeTitles));
     }
 
     @Transactional
@@ -56,15 +57,24 @@ public class EmployeeController extends Controller
         Employee employee=new Employee();
 
         employee.setUserName(userName);
-        employee.setPassword(password);
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
         employee.setEmail(email);
         employee.setPhoneNumber(phoneNumber);
         employee.setEmployeeTitleId(title);
-
-        jpaApi.em().persist(employee);
-
+        try
+        {
+            byte[]salt=Password.getNewSalt();
+            byte[] hashedPassword=Password.hashPassword(password.toCharArray(),salt);
+            password=null;
+            employee.setSalt(salt);
+            employee.setPassword(hashedPassword);
+            jpaApi.em().persist(employee);
+        }
+        catch(Exception e)
+        {
+            return ok("Failed to save User");
+        }
         return ok("Employee saved as id: "+employee.getEmployeeId());
     }
 }

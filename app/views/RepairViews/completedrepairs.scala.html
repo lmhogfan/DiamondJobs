@@ -1,0 +1,37 @@
+@(repairs:List[RepairModels.RepairUpdate])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Completed Jobs</title>
+    @bootstrap.render
+</head>
+<body>
+<h1 class="display-4 text-center">Completed Repairs</h1>
+<div class="container">
+    Click repair to see details:
+    <table class="table table-hover">
+        <th>Customer</th><th>Item Description</th><th>Date Started</th><th>Date Completed</th>
+            @for(repair <- repairs){
+        <tr class='clickable-row' data-href='/repairdetail/@repair.getRepairsId'>
+        <td>
+                @repair.getFirstName @repair.getLastName
+            </td>
+            <td>
+                @repair.getItemDescription
+            </td>
+            <td>
+                @repair.getJobStarted
+            </td>
+            <td>
+                @repair.getJobFinished
+            </td>
+        </tr>
+
+        }
+    </table>
+</div>
+<script type="text/javascript" src="assets/javascripts/selectable-table.js"></script>
+
+</body>
+</html>

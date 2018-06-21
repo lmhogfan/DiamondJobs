@@ -1,0 +1,55 @@
+@(states:List[CustomerModels.CityState],customer:CustomerModels.Customer,
+number:CustomerModels.PhoneNumber, cities:List[CustomerModels.Cities])
+@import helper._
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @bootstrap.render
+    <title>New Customer</title>
+</head>
+<body>
+<form method="post">
+    @CSRF.formField
+    First Name: <input type="text" name="firstName" id="firstName" value="@customer.getFirstName" maxlength="20">
+    <br>
+    Last Name: <input type="text" name="lastName" id="lastName" value="@customer.getLastName" maxlength="20">
+    <br>
+    Phone Number:<input type="text" name="areaCode" id="areaCode" value="@number.getAreaCode" maxlength="3">
+    <input type="text" name="numPrefix" id="numPrefix" value="@number.getNumPrefix" maxlength="3">
+    <input type="text" name="phoneAddress" id="phoneAddress" value="@number.getPhoneAddress" maxlength="4">
+    <br>
+    Address: <input type="text" name="address" id="address" value="@customer.getAddress" maxlength="40">
+    <br>
+    City/State:
+    <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
+            data-url="/../newCustomer/cities" data-replacement="container1">
+        <option value="">Select State</option>
+        @for(state <- states){
+        @if(state.getStateId==customer.getStateId){
+        <option selected="selected">@customer.getStateId</option>
+        }else{
+        <option>@state.getStateId</option>
+        }
+        }
+    </select>
+    <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
+            data-replacement="container1" data-default-label="@customer.getCity">
+        <option selected="selected" value="@customer.getCity">@customer.getCity</option>
+        @for(city <-cities){
+        @if(customer.getStateId==city.getStateId){
+        <option value="@city.getCity">@city.getCity</option>
+        }
+        }
+
+    </select>
+    Zip-Code: <input type="text" name="zipCode" value="@customer.getZipCode" maxlength="5">
+    <br>
+    E-Mail Address:<input type="text" name="email" id="email" value="@customer.getEmail" maxlength="40">
+    <br>
+    Notes: <textarea name="notes" id="notes"  maxlength="500">@customer.getNotes</textarea>
+    <br>
+    <input type="submit" value="Save Changes">
+</form>
+<script type="text/javascript" src="/assets/javascripts/cascading-drop-down.js"></script>
+</body>
+</html>

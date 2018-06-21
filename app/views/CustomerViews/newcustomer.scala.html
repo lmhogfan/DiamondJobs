@@ -1,0 +1,43 @@
+@(states:List[CustomerModels.CityState])
+@import helper._
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @bootstrap.render
+    <title>New Customer</title>
+</head>
+<body>
+<form method="post">
+    @CSRF.formField
+    First Name: <input type="text" name="firstName" id="firstName" maxlength="20">
+    <br>
+    Last Name: <input type="text" name="lastName" id="lastName" maxlength="20">
+    <br>
+    Phone Number:<input type="text" name="areaCode" id="areaCode" maxlength="3">
+    <input type="text" name="numPrefix" id="numPrefix" maxlength="3">
+    <input type="text" name="phoneAddress" id="phoneAddress" maxlength="4">
+    <br>
+    Address: <input type="text" name="address" id="address" maxlength="40">
+    <br>
+    City/State:
+    <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
+            data-url="newCustomer/cities" data-replacement="container1">
+        <option value="">Select State</option>
+        @for(state <- states){
+        <option>@state.getStateId</option>
+        }
+    </select>
+    <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
+            data-replacement="container1" data-default-label="Select City" disabled>
+    </select>
+    Zip-Code: <input type="text" name="zipCode" maxlength="5">
+    <br>
+    E-Mail Address:<input type="text" name="email" id="email" maxlength="40">
+    <br>
+    Notes: <textarea name="notes" id="notes" maxlength="500"></textarea>
+    <input type="submit">
+</form>
+<script type="text/javascript" src="/assets/javascripts/cascading-drop-down.js"></script>
+
+</body>
+</html>
