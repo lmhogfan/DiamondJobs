@@ -3,19 +3,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Repairs</title>
+    <title>New Custom</title>
     @bootstrap.render
 </head>
 <body>
 @navbar.render
 <div class="container">
-    <h1 class="display-4 text-center">New Repairs</h1>
+    <h1 class="display-4 text-center">New Custom Job</h1>
     <div class="row">
-        <div class="col-2 border-top border-right text-center">
+        <div class="col-2 text-center border-right border-top">
             @sidebar.render
         </div>
         <div class="col-10 border-top">
-            <p>Choose customer to start new repair</p>
+            <p>Choose customer to start new custom job</p>
             <form action="@routes.CustomerController.getNewCustomer" method="get">
                 <button type="submit">New Customer</button>
             </form>
@@ -27,20 +27,18 @@
             <table class="table table-hover">
                 <th>First Name</th><th>Last Name</th><th>Phone Number</th>
                 @for(customer <- customers){
-                <tr class='clickable-row' data-href='/newRepair/@customer.getCustomerId'>
+                <tr class='clickable-row' data-href='/newCustom/@customer.getCustomerId'>
                     <td>@customer.getFirstName</td>
                     <td>@customer.getLastName</td>
                     <td>@customer.getAreaCode-
                         @customer.getNumPrefix-
                         @customer.getPhoneAddress</td>
-
                 </tr>
                 }
             </table>
         </div>
     </div>
 </div>
-
 <script type="text/javascript" src="assets/javascripts/selectable-table.js"></script>
 </body>
 </html>

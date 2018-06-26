@@ -131,7 +131,11 @@ public class CustomerController extends Controller
                 " WHERE customerId= :customerId";
         Customer customer=jpaApi.em().createQuery(sql,Customer.class).setParameter("customerId",customerId)
                 .getSingleResult();
-        return ok(views.html.CustomerViews.customer.render(customer));
+        String number="SELECT pn FROM PhoneNumber pn "+
+                "WHERE customerId= :customerId";
+        PhoneNumber phoneNumber=jpaApi.em().createQuery(number,PhoneNumber.class)
+                .setParameter("customerId",customerId).getSingleResult();
+        return ok(views.html.CustomerViews.customer.render(customer, phoneNumber));
     }
 
     @Transactional(readOnly = true)

@@ -1,39 +1,38 @@
-@(repairs: List[RepairModels.RepairHistory], customer:CustomerModels.Customer)
+@(repairs:List[RepairModels.RepairUpdate],searchCriteria:String)
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>All Repairs</title>
     @bootstrap.render
 </head>
 <body>
 @navbar.render
-<h1 class="display-4 text-center">Repair History</h1>
 <div class="container">
     <div class="row">
-        <div class="col-2 text-center border-top border-right">
+        <div class="col-2 text-center border-right border-top">
             @sidebar.render
         </div>
         <div class="col-10 border-top">
-            Click repair to view details:
+            <form method="get">
+                <input type="text" name="searchCriteria" value="@searchCriteria" >
+                <input type="submit" value="Search">
+            </form>
             <table class="table table-hover">
-                <th>Customer Name</th><th>Item Description</th><th>Status</th><th>Status Changed</th><th>Employee</th>
+                <th>Customer</th><th>Description</th><th>Status</th><th>Repair Started</th>
                 @for(repair <- repairs){
                 <tr class='clickable-row' data-href='/repairdetail/@repair.getRepairsId'>
                     <td>@repair.getFirstName @repair.getLastName</td>
                     <td>@repair.getItemDescription</td>
                     <td>@repair.getRepairStatusName</td>
-                    <td>@repair.getStatusChange</td>
-                    <td>@repair.getUsername</td>
+                    <td>@repair.getJobStarted</td>
                 </tr>
                 }
             </table>
-            <a href="/customer/@customer.getCustomerId"><button>Back</button></a>
         </div>
     </div>
 </div>
-
-<script type="text/javascript" src="../assets/javascripts/selectable-table.js"></script>
+<script type="text/javascript" src="assets/javascripts/selectable-table.js"></script>
 
 </body>
 </html>

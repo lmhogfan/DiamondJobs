@@ -1,4 +1,4 @@
-@(repairs:List[RepairModels.RepairUpdate])
+@(repairs:List[RepairModels.RepairUpdate],searchCriteria:String)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,29 +7,42 @@
     @bootstrap.render
 </head>
 <body>
-<h1 class="display-4 text-center">Completed Repairs</h1>
+@navbar.render
 <div class="container">
-    Click repair to see details:
-    <table class="table table-hover">
-        <th>Customer</th><th>Item Description</th><th>Date Started</th><th>Date Completed</th>
-            @for(repair <- repairs){
-        <tr class='clickable-row' data-href='/repairdetail/@repair.getRepairsId'>
-        <td>
-                @repair.getFirstName @repair.getLastName
-            </td>
-            <td>
-                @repair.getItemDescription
-            </td>
-            <td>
-                @repair.getJobStarted
-            </td>
-            <td>
-                @repair.getJobFinished
-            </td>
-        </tr>
+    <h1 class="display-4 text-center">Completed Repairs</h1>
+    <div class="row">
+        <div class="col-2 border-right border-top text-center">
+            @sidebar.render
+        </div>
+        <div class="col-10 border-top">
+            Click repair to see details:
+            <form method="get">
+                <input type="text" name="searchCriteria" value="@searchCriteria" >
+                <input type="submit" value="Search">
+            </form>
+            <table class="table table-hover">
+                <th>Customer</th><th>Item Description</th><th>Date Started</th><th>Date Completed</th>
+                @for(repair <- repairs){
+                <tr class='clickable-row' data-href='/repairdetail/@repair.getRepairsId'>
+                    <td>
+                        @repair.getFirstName @repair.getLastName
+                    </td>
+                    <td>
+                        @repair.getItemDescription
+                    </td>
+                    <td>
+                        @repair.getJobStarted
+                    </td>
+                    <td>
+                        @repair.getJobFinished
+                    </td>
+                </tr>
 
-        }
-    </table>
+                }
+            </table>
+        </div>
+    </div>
+
 </div>
 <script type="text/javascript" src="assets/javascripts/selectable-table.js"></script>
 

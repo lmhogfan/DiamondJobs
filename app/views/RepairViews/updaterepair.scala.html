@@ -8,38 +8,61 @@
     @bootstrap.render
 </head>
 <body>
-<form method="post">
-    @CSRF.formField
-    <table class="table">
-        <th>Customer Name</th><th>Item Description</th><th>Job Started</th><th>Status</th>
-        <tr>
-            <td>@repair.getFirstName @repair.getLastName</td>
-            <td>@repair.getItemDescription</td>
-            <td>@repair.getJobStarted</td>
-            <td>
-                <select name="statusId" id="statusId">
-                    @for(status <- statuses){
-                    @if(repair.getRepairStatusName == status.getRepairStatusName){
-                    <option value="@status.getRepairStatusCode"
-                            selected="selected">@status.getRepairStatusName</option>
-                    } else {
-                    <option value="@status.getRepairStatusCode" >@status.getRepairStatusName</option>
-                    }
+@navbar.render
+<h1 class="display-4 text-center">Update Repair</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-2 text-center border-top border-right">
+            @sidebar.render
+        </div>
+        <div class="col-10 border-top">
+            <form method="post">
+                @CSRF.formField
+                <table class="table">
+                    <th>Customer Name</th><th>Item Description</th><th>Job Started</th><th>Status</th>
+                    <tr>
+                        <td>@repair.getFirstName @repair.getLastName</td>
+                        <td>@repair.getItemDescription</td>
+                        <td>@repair.getJobStarted</td>
+                        <td>
+                            <select name="statusId" id="statusId">
+                                @for(status <- statuses){
+                                @if(repair.getRepairStatusName == status.getRepairStatusName){
+                                <option value="@status.getRepairStatusCode"
+                                        selected="selected">@status.getRepairStatusName</option>
+                                } else {
+                                <option value="@status.getRepairStatusCode" >@status.getRepairStatusName</option>
+                                }
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <div id="complete" style="display: none">
+                    Total Price:
+                    <input type="text" id="totalprice" name="totalprice"/>
+                    <br>
+                    Notify Customer?
+                    <select name="notify" id="notify">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                Notes:<br>
+                <textarea name="notes" id="notes"></textarea>
+                <br>
+                Employee Username:<br>
+                <select name="username">
+                    @for(employee <- employees){
+                    <option value="@employee.getEmployeeId">@employee.getUserName</option>
                     }
                 </select>
-            </td>
-        </tr>
-    </table>
-    Notes:<br>
-    <textarea name="notes" id="notes"></textarea>
-    <br>
-    Employee Username:<br>
-    <select name="username">
-        @for(employee <- employees){
-        <option value="@employee.getEmployeeId">@employee.getUserName</option>
-        }
-    </select>
-    <button type="submit">Update Repair</button>
-</form>
+                <button type="submit">Update Repair</button>
+            </form>
+            <button onclick="history.go(-1)">Cancel</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/assets/javascripts/showonchange.js"></script>
 </body>
 </html>

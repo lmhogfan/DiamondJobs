@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeController extends Controller
+public class HomeController extends ApplicationController
 {
 
     private JPAApi jpaApi;
@@ -30,7 +30,14 @@ public class HomeController extends Controller
 
     public Result index()
     {
-        return ok(views.html.index.render());
+        if(isLoggedIn())
+        {
+            return ok(views.html.index.render());
+        }
+        else
+        {
+            return redirect(routes.HomeController.getLogin());
+        }
     }
 
     public Result getManagerTools()
@@ -77,6 +84,7 @@ public class HomeController extends Controller
 
             if(Arrays.equals(hashedPassword,loggedInEmployee.getPassword()))
             {
+                login(loggedInEmployee.getUserName());
                 return redirect(routes.HomeController.index());
             }
             else
@@ -98,5 +106,12 @@ public class HomeController extends Controller
         }
         return ok(views.html.login.render("Invalid username or password"));
     }
+
+    public Result postLogout()
+    {
+        logout();
+        return redirect(routes.HomeController.getLogin());
+    }
+
 
 }

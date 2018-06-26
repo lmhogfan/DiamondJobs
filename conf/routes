@@ -3,9 +3,10 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.getLogin
-POST    /                           controllers.HomeController.postLogin
-GET     /index                      controllers.HomeController.index
+GET     /login                      controllers.HomeController.getLogin
+POST    /login                      controllers.HomeController.postLogin
+POST    /logout                     controllers.HomeController.postLogout
+GET     /                           controllers.HomeController.index
 GET     /manager                    controllers.HomeController.getManagerTools
 GET     /employeetools              controllers.HomeController.getEmployeeTools
 GET     /test                       controllers.HomeController.getTestPage
@@ -22,11 +23,17 @@ GET     /employees                  controllers.EmployeeController.getEmployees
 GET     /newEmployee                controllers.EmployeeController.getNewEmployee
 POST    /newEmployee                controllers.EmployeeController.postNewEmployee
 
+GET     /customs                    controllers.JobController.getUpdateCustoms
+GET     /newcustoms                 controllers.JobController.getNewCustoms
+GET     /completedcustoms           controllers.JobController.getCompletedCustoms
+GET     /newCustom/:id              controllers.JobController.getNewCustom(id:Integer)
+POST    /newCustom/:id              controllers.JobController.postNewCustom(id:Integer)
+
+
 GET     /newrepairs                 controllers.JobController.getRepairs
-GET     /customs                    controllers.JobController.getCustoms
 GET     /newRepair/:id              controllers.JobController.getNewRepair(id:Integer)
 POST    /newRepair/:id              controllers.JobController.postNewRepair(id:Integer)
-GET     /repairs                    controllers.JobController.getRepairTools
+GET     /repairs                    controllers.JobController.getAllRepairs
 GET     /updaterepairs              controllers.JobController.getUpdateRepairs
 GET     /updaterepair/:id           controllers.JobController.getUpdateRepair(id:Integer)
 POST    /updaterepair/:id           controllers.JobController.postUpdateRepair(id:Integer)

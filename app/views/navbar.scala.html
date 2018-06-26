@@ -1,0 +1,15 @@
+@import helper._
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<div class="container-fluid">
+        <div class="navbar-header">
+
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <form method="post" action="/logout">
+                @CSRF.formField
+                <p class="navbar-text">Logged in as: @session.get("loggedin")</p>
+                <button type="submit">Log Out</button>
+            </form>
+        </ul>
+    </div>
+</nav> 

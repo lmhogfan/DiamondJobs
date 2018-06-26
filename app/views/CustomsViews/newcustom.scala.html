@@ -1,16 +1,16 @@
-@(customer:CustomerModels.Customer, statuses:List[RepairModels.RepairStatusDetail], employees:List[EmployeeModels.Employee])
+@(customer:CustomerModels.Customer, statuses:List[CustomsModels.CustomStatusDetail], employees:List[EmployeeModels.Employee])
 @import helper._
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New Repair</title>
+    <title>New Custom Job</title>
     @bootstrap.render
 </head>
 <body>
 @navbar.render
 <div class="container">
-    <h1 class="display-4 text-center">New Repair for: @customer.getFirstName @customer.getLastName</h1>
+    <h1 class="display-4 text-center">New Custom Job for: @customer.getFirstName @customer.getLastName</h1>
     <div class="row">
         <div class="col-2 border-right border-top text-center">
             @sidebar.render
@@ -19,15 +19,13 @@
             <form method="post">
                 @CSRF.formField
                 <input type="hidden" name="customerId" value="@customer.getCustomerId">
-                <br>
                 Item Description:<br><textarea name="itemDescription"></textarea><br>
-                Work To Be Done:<br><textarea name="workNeeded"></textarea><br>
                 Envelope Number:<br><input type="text" name="envelopeNumber" maxlength="6"><br>
-                Price Estimate:<br><textarea name="priceEstimate"></textarea><br>
-                Repair Status:
-                <select name="repairStatusId">
+                Quote:<br><textarea name="quote"></textarea><br>
+                Job Status:
+                <select name="customStatusCode">
                     @for(status <- statuses){
-                    <option value="@status.getRepairStatusCode">@status.getRepairStatusName</option>
+                    <option value="@status.getCustomStatusCode">@status.getCustomStatusName</option>
                     }
                 </select><br><br>
                 Employee Username:<br>
@@ -36,7 +34,7 @@
                     <option value="@employee.getEmployeeId">@employee.getUserName</option>
                     }
                 </select>
-                <button type="submit"> Start Repair</button>
+                <button type="submit"> Start Custom Job</button>
             </form>
             <button onclick="history.go(-1)">Cancel</button>
         </div>

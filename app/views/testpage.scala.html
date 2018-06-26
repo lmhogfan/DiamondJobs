@@ -1,4 +1,4 @@
-@(customers: List[Customer])
+@(customers: List[CustomerModels.Customer])
 @import helper._
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +40,29 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#ddlPassport").change(function () {
+            if ($(this).val() == "Y") {
+                $("#dvPassport").show();
+            } else {
+                $("#dvPassport").hide();
+            }
+        });
+    });
+</script>
+<span>Do you have Passport?</span>
+<select id="ddlPassport">
+    <option value="N">No</option>
+    <option value="Y">Yes</option>
+</select>
+<hr />
+<div id="dvPassport" style="display: none">
+    Passport Number:
+    <input type="text" id="txtPassportNumber" />
+</div>
+
 <script type="text/javascript" src="/assets/javascripts/dataTables.js"></script>
 </body>
 </html>

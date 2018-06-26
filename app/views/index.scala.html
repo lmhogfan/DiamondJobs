@@ -5,6 +5,7 @@
     @bootstrap.render
 </head>
 <body>
+@navbar.render
 <h1 class="display-4 text-center">Welcome</h1>
 <div class="container text-center">
     <div class="dropdown">
@@ -16,17 +17,37 @@
         </ul>
     </div>
     <br>
-    <a href="repairs" class="btn btn-primary" role="button">Repairs</a>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown" type="button" data-toggle="dropdown">Repairs
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="newrepairs">New Repair</a></li>
+            <li><a href="updaterepairs">Update Repairs</a></li>
+            <li><a href="completedrepairs">Completed Repairs</a></li>
+        </ul>
+    </div>
     <br>
-    <br>
-    <a href="customs" class="btn btn-primary" role="button">Customs</a>
-    <br>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown" type="button" data-toggle="dropdown">Customs
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="../newcustoms">New Custom</a></li>
+            <li><a href="../customs">Update Customs</a></li>
+            <li><a href="../completedcustoms">Completed Customs</a></li>
+        </ul>
+    </div>
     <br>
     <a href="employeetools" class="btn btn-primary" role="button">Employees</a>
     <br>
     <br>
-    <a href="manager" class="btn btn-primary" role="button">Manager Tools</a>
-    <br>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown" type="button" data-toggle="dropdown">Manager Tools
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="../employees">Existing Employees</a></li>
+            <li><a href="../newEmployee">New Employee</a></li>
+        </ul>
+    </div><br>
 </div>
 
 </body>

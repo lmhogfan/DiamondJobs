@@ -13,7 +13,7 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.util.List;
 
-public class EmployeeController extends Controller
+public class EmployeeController extends ApplicationController
 {
     private JPAApi jpaApi;
     private FormFactory formFactory;
