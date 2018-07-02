@@ -6,9 +6,11 @@ import play.mvc.Controller;
 public class ApplicationController extends Controller
 {
 
-    public void login(String username)
+    public void login(String username, int employeeId, int employeeTitleId)
     {
         session().put("loggedin", username);
+        session().put("employeeId",""+employeeId);
+        session().put("title",""+employeeTitleId);
     }
 
     public void logout()

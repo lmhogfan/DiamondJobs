@@ -1,0 +1,32 @@
+@(employee:EmployeeModels.Employee, title:EmployeeModels.EmployeeTitle)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee</title>
+    @bootstrap.render
+</head>
+@navbar.render
+<body>
+<div class="container">
+    <h1 class="display-4 text-center">Employee Detail</h1>
+    <div class="row">
+        <div class="col-2 text-center border-top border-right">
+            @sidebar.render
+        </div>
+        <div class="col-8 border-top text-center">
+           <h2>@employee.getFirstName @employee.getLastName</h2>
+            <h5>@title.getEmployeeTitleName</h5>
+            @employee.getEmail<br>
+            @employee.getAddress<br>
+            @employee.getCity, @employee.getStateId @employee.getZipCode<br>
+            @employee.getPhoneNumber<br><br>
+            <a href="../editEmployee/@employee.getEmployeeId"  class="btn btn-primary" role="button">Edit Profile</a>
+            <a href="../changePassword/@employee.getEmployeeId"  class="btn btn-primary" role="button">Change Password</a><br><br>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

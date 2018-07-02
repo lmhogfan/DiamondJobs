@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Completed Jobs</title>
     @bootstrap.render
+    <link rel="stylesheet" href="/assets/stylesheets/jquery.dataTables.min.css">
 </head>
 <body>
 @navbar.render
@@ -16,12 +17,11 @@
         </div>
         <div class="col-10 border-top">
             Click repair to see details:
-            <form method="get">
-                <input type="text" name="searchCriteria" value="@searchCriteria" >
-                <input type="submit" value="Search">
-            </form>
-            <table class="table table-hover">
+            <table class="display" id="test" style="width:100%">
+                <thead>
                 <th>Customer</th><th>Item Description</th><th>Date Started</th><th>Date Completed</th>
+                </thead>
+                <tbody>
                 @for(repair <- repairs){
                 <tr class='clickable-row' data-href='/repairdetail/@repair.getRepairsId'>
                     <td>
@@ -37,14 +37,14 @@
                         @repair.getJobFinished
                     </td>
                 </tr>
-
                 }
+                </tbody>
             </table>
         </div>
     </div>
 
 </div>
 <script type="text/javascript" src="assets/javascripts/selectable-table.js"></script>
-
+<script type="text/javascript" src="/assets/javascripts/dataTables.js"></script>
 </body>
 </html>

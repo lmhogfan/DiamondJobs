@@ -4,6 +4,7 @@ package controllers;
 import models.CustomerModels.Customer;
 import models.EmployeeModels.Employee;
 import models.EmployeeModels.Password;
+import models.RepairModels.Repair;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -28,11 +29,15 @@ public class HomeController extends ApplicationController
         this.formFactory = formFactory;
     }
 
+    @Transactional(readOnly = true)
     public Result index()
     {
         if(isLoggedIn())
         {
-            return ok(views.html.index.render());
+            String sql="SELECT r FROM Repair r "+
+                    "WHERE r.jobFinished IS NOT NULL";
+            List<Repair> repairs=jpaApi.em().createQuery(sql,Repair.class).getResultList();
+            return ok(views.html.index.render(repairs));
         }
         else
         {
@@ -84,7 +89,8 @@ public class HomeController extends ApplicationController
 
             if(Arrays.equals(hashedPassword,loggedInEmployee.getPassword()))
             {
-                login(loggedInEmployee.getUserName());
+                login(loggedInEmployee.getUserName(),loggedInEmployee.getEmployeeId(),
+                        loggedInEmployee.getEmployeeTitleId());
                 return redirect(routes.HomeController.index());
             }
             else

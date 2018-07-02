@@ -1,0 +1,68 @@
+@(employeeTitles: List[EmployeeModels.EmployeeTitle],states:List[CustomerModels.CityState],
+employee:EmployeeModels.Employee, cities:List[CustomerModels.Cities])
+@import helper._
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    @bootstrap.render
+</head>
+@navbar.render
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-2 text-center border-top border-right">
+            @sidebar.render
+        </div>
+        <div class="col-10 border-top">
+            <h2>@employee.getFirstName @employee.getLastName</h2>
+            <form method="post">
+                @CSRF.formField
+                E-mail:<input type="text" name="email" maxlength="40" value="@employee.getEmail"><br>
+                Phone Number:<input type="text" name="phoneNumber" value="@employee.getPhoneNumber" maxlength="12"><br>
+                Address: <input type="text" name="address" id="address" value="@employee.getAddress" maxlength="40">
+                <br>
+                City/State:
+                <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
+                        data-url="../newCustomer/cities" data-replacement="container1">
+                    <option value="">Select State</option>
+                    @for(state <- states){
+                    @if(state.getStateId==employee.getStateId){
+                    <option selected="selected">@employee.getStateId</option>
+                    }else{
+                    <option>@state.getStateId</option>
+                    }
+                    }
+                </select>
+                <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
+                        data-replacement="container1" data-default-label="@employee.getCity">
+                    <option selected="selected" value="@employee.getCity">@employee.getCity</option>
+                    @for(city <-cities){
+                    @if(employee.getStateId==city.getStateId){
+                    <option value="@city.getCity">@city.getCity</option>
+                    }
+                    }
+
+                </select>
+                Zip-Code: <input type="text" name="zipCode" maxlength="5" value="@employee.getZipCode">
+                <br>
+                Employee Title:
+                <select name="employeeTitleId">
+                    @for(employeeTitle <- employeeTitles){
+                    @if(employeeTitle.getEmployeeTitleId==employee.getEmployeeTitleId){
+                    <option value="@employee.getEmployeeTitleId" selected="selected">@employeeTitle.getEmployeeTitleName</option>
+                    }else{
+                    <option value="@employeeTitle.getEmployeeTitleId">@employeeTitle.getEmployeeTitleName</option>
+                    }
+                    }
+                </select><br>
+                <button type="submit">Save</button>
+            </form>
+            <button onclick="history.go(-1)">Cancel</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/assets/javascripts/cascading-drop-down.js"></script>
+</body>
+</html>

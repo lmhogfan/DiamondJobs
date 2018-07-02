@@ -11,7 +11,7 @@ public class Email
     public static void sendEmail(String contents, String destinationEmail)
     {
         String sender= "lmhogfan@gmail.com";
-        String subject="Your repair is ready for pick-up";
+        String subject="Your jewelry is ready for pick-up";
 
         try
         {

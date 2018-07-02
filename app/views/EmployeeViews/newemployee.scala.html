@@ -1,4 +1,4 @@
-@(employeeTitles: List[EmployeeModels.EmployeeTitle])
+@(employeeTitles: List[EmployeeModels.EmployeeTitle],states:List[CustomerModels.CityState],message:String)
 @import helper._
 <!DOCTYPE html>
 <html lang="en">
@@ -7,23 +7,53 @@
     <title>New Employee</title>
     @bootstrap.render
 </head>
+@navbar.render
 <body>
-<form method="post">
-    @CSRF.formField
-    User Name:<input type="text" name="userName" maxlength="20"><br>
-    Password:<input type="password" name="password" maxlength="20"><br>
-    First Name:<input type="text" name="firstName" maxlength="20"><br>
-    Last Name:<input type="text" name="lastName" maxlength="20"><br>
-    E-mail:<input type="text" name="email" maxlength="40"><br>
-    Phone Number:<input type="text" name="phoneNumber" maxlength="12"><br>
-    Employee Title:
-    <select name="employeeTitleId">
-        @for(employeeTitle <- employeeTitles){
-         <option value="@employeeTitle.getEmployeeTitleId">@employeeTitle.getEmployeeTitleName</option>
-        }
-    </select><br>
-    <input type="submit" class="btn btn-primary" value="Save">
+<div class="container">
+    <h1 class="display-4 text-center">New Employee</h1>
+    <div class="row">
+        <div class="col-2 text-center border-right border-top">
+            @sidebar.render
+        </div>
+        <div class="col-10 border-top">
+            <form method="post">
+                @CSRF.formField
+                User Name:<input type="text" name="userName" maxlength="20"><br>
+                Password:<input type="password" name="password" maxlength="20"><br>
+                Confirm Password:<input type="password" name="confirm" maxlength="20"<br>
+                First Name:<input type="text" name="firstName" maxlength="20"><br>
+                Last Name:<input type="text" name="lastName" maxlength="20"><br>
+                E-mail:<input type="text" name="email" maxlength="40"><br>
+                Phone Number:<input type="text" name="phoneNumber" maxlength="12"><br>
+                Address: <input type="text" name="address" id="address" maxlength="40">
+                <br>
+                City/State:
+                <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
+                        data-url="newCustomer/cities" data-replacement="container1">
+                    <option value="">Select State</option>
+                    @for(state <- states){
+                    <option>@state.getStateId</option>
+                    }
+                </select>
+                <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
+                        data-replacement="container1" data-default-label="Select City" disabled>
+                </select>
+                Zip-Code: <input type="text" name="zipCode" maxlength="5">
+                <br>
+                Employee Title:
+                <select name="employeeTitleId">
+                    @for(employeeTitle <- employeeTitles){
+                    <option value="@employeeTitle.getEmployeeTitleId">@employeeTitle.getEmployeeTitleName</option>
+                    }
+                </select><br>
+                <button type="submit">Save</button>
+            </form>
+            <button onclick="history.go(-1)">Cancel</button>
+            @message<br>
+        </div>
+    </div>
+</div>
 
-</form>
+<script type="text/javascript" src="/assets/javascripts/cascading-drop-down.js"></script>
 </body>
 </html>

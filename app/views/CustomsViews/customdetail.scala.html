@@ -1,0 +1,39 @@
+@(custom:CustomsModels.CustomUpdate, statuses:List[CustomsModels.CustomDetail])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Detail</title>
+    @bootstrap.render
+</head>
+@navbar.render
+<body>
+<div class="container">
+    <h1 class="display-4 text-center">Custom job for @custom.getFirstName @custom.getLastName</h1>
+    <div class="row">
+        <div class="col-2 text-center border-top border-right">
+            @sidebar.render
+        </div>
+        <div class="col-10 border-top">
+            <h3>@custom.getItemDescription</h3>
+            <table class="table">
+                <th>Status</th><th>Notes</th><th>Time Updated</th><th>Employee</th>
+                @for(status <-statuses){
+                <tr>
+                    <td>@status.getCustomStatusName</td>
+                    <td>@status.getNotes</td>
+                    <td>@status.getStatusChanged</td>
+                    <td>@status.getUsername</td>
+                </tr>
+                }
+            </table>
+            @if(custom.getCustomStatusCode!=7){
+            <a href="/updatecustom/@custom.getCustomId"><button>Update</button></a>
+            }else{}
+            <button onclick="history.go(-1)">Back</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

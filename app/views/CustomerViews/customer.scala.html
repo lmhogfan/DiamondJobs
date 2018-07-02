@@ -21,13 +21,14 @@
             @phonenumber.getAreaCode-@phonenumber.getNumPrefix-@phonenumber.getPhoneAddress
             <br>
             <br>
-            <br>
             Customer Notes:<br>
             @customer.getNotes
             <br><br>
-            <a href="../editcustomer/@customer.getCustomerId"  class="btn btn-primary" role="button">Edit Customer</a>
+            <a href="../editcustomer/@customer.getCustomerId"  class="btn btn-primary" role="button">Edit Customer</a><br><br>
             <a href="../newRepair/@customer.getCustomerId" class="btn btn-primary" role="button">New Repair</a>
-            <a href="../repairhistory/@customer.getCustomerId"  class="btn btn-primary" role="button">Repairs</a>
+            <a href="../repairhistory/@customer.getCustomerId"  class="btn btn-primary" role="button">Repairs</a><br><br>
+            <a href="../newCustom/@customer.getCustomerId" class="btn btn-primary" role="button">New Custom Job</a>
+            <a href="../customhistory/@customer.getCustomerId" class="btn btn-primary" role="button">Custom Jobs</a>
         </div>
     </div>
 

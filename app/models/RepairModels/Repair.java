@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 public class Repair
@@ -116,5 +117,10 @@ public class Repair
     public void setRepairStatusId(int repairStatusId)
     {
         this.repairStatusId = repairStatusId;
+    }
+
+    public long getDaysToComplete()
+    {
+        return ChronoUnit.DAYS.between(jobStarted,jobFinished);
     }
 }

@@ -5,11 +5,20 @@
 
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <form method="post" action="/logout">
-                @CSRF.formField
-                <p class="navbar-text">Logged in as: @session.get("loggedin")</p>
-                <button type="submit">Log Out</button>
-            </form>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Logged in as: @session.get("loggedin")
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href='../employee/@session.get("employeeId")'>My Profile</a>
+                    <form method="post" action="/logout">
+                        @CSRF.formField
+                        <button type="submit" class="dropdown-item">Log Out</button>
+                    </form>
+                </div>
+            </div>
+
         </ul>
     </div>
 </nav> 

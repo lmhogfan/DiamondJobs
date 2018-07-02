@@ -18,12 +18,12 @@
         <div class="col-10 border-top">
             <form method="post">
                 @CSRF.formField
-                <input type="hidden" name="customerId" value="@customer.getCustomerId">
+                <input type="hidden" name="customerId" maxlength="500" value="@customer.getCustomerId">
                 <br>
-                Item Description:<br><textarea name="itemDescription"></textarea><br>
-                Work To Be Done:<br><textarea name="workNeeded"></textarea><br>
+                Item Description:<br><textarea maxlength="500" name="itemDescription"></textarea><br>
+                Work To Be Done:<br><textarea maxlength="500" name="workNeeded"></textarea><br>
                 Envelope Number:<br><input type="text" name="envelopeNumber" maxlength="6"><br>
-                Price Estimate:<br><textarea name="priceEstimate"></textarea><br>
+                Price Estimate:<br><textarea maxlength="100" name="priceEstimate"></textarea><br>
                 Repair Status:
                 <select name="repairStatusId">
                     @for(status <- statuses){

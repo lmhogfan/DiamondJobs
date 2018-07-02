@@ -1,16 +1,16 @@
-@(repair: RepairModels.RepairUpdate, statuses: List[RepairModels.RepairStatusDetail], employees:List[EmployeeModels.Employee])
+@(custom:CustomsModels.CustomUpdate, employees: List[EmployeeModels.Employee], statuses: List[CustomsModels.CustomStatusDetail])
 @import helper._
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update Repair</title>
+    <title>Update Custom</title>
     @bootstrap.render
 </head>
-<body>
 @navbar.render
-<h1 class="display-4 text-center">Update Repair</h1>
+<body>
 <div class="container">
+    <h1 class="display-4 text-center">Update Custom</h1>
     <div class="row">
         <div class="col-2 text-center border-top border-right">
             @sidebar.render
@@ -21,17 +21,17 @@
                 <table class="table">
                     <th>Customer Name</th><th>Item Description</th><th>Job Started</th><th>Status</th>
                     <tr>
-                        <td>@repair.getFirstName @repair.getLastName</td>
-                        <td>@repair.getItemDescription</td>
-                        <td>@repair.getJobStarted</td>
+                        <td>@custom.getFirstName @custom.getLastName</td>
+                        <td>@custom.getItemDescription</td>
+                        <td>@custom.getJobStarted</td>
                         <td>
                             <select name="statusId" id="statusId">
                                 @for(status <- statuses){
-                                @if(repair.getRepairStatusName == status.getRepairStatusName){
-                                <option value="@status.getRepairStatusCode"
-                                        selected="selected">@status.getRepairStatusName</option>
+                                @if(custom.getCustomStatusName == status.getCustomStatusName){
+                                <option value="@status.getCustomStatusCode"
+                                        selected="selected">@status.getCustomStatusName</option>
                                 } else {
-                                <option value="@status.getRepairStatusCode" >@status.getRepairStatusName</option>
+                                <option value="@status.getCustomStatusCode" >@status.getCustomStatusName</option>
                                 }
                                 }
                             </select>
@@ -49,7 +49,7 @@
                     </select>
                 </div>
                 Notes:<br>
-                <textarea name="notes" maxlength="500" id="notes"></textarea>
+                <textarea name="notes" id="notes" maxlength="500"></textarea>
                 <br>
                 Employee Username:<br>
                 <select name="username">
@@ -57,12 +57,12 @@
                     <option value="@employee.getEmployeeId">@employee.getUserName</option>
                     }
                 </select>
-                <button type="submit">Update Repair</button>
+                <button type="submit">Update Custom</button>
             </form>
             <button onclick="history.go(-1)">Cancel</button>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/assets/javascripts/showonchange.js"></script>
+<script type="text/javascript" src="/assets/javascripts/showonchangecustoms.js"></script>
 </body>
 </html>

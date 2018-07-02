@@ -19,9 +19,9 @@
             <form method="post">
                 @CSRF.formField
                 <input type="hidden" name="customerId" value="@customer.getCustomerId">
-                Item Description:<br><textarea name="itemDescription"></textarea><br>
+                Item Description:<br><textarea maxlength="500" name="itemDescription"></textarea><br>
                 Envelope Number:<br><input type="text" name="envelopeNumber" maxlength="6"><br>
-                Quote:<br><textarea name="quote"></textarea><br>
+                Quote:<br><textarea  maxlength="500" name="quote"></textarea><br>
                 Job Status:
                 <select name="customStatusCode">
                     @for(status <- statuses){

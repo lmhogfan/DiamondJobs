@@ -22,13 +22,21 @@ GET     /newCustomer/cities         controllers.CustomerController.getCities
 GET     /employees                  controllers.EmployeeController.getEmployees
 GET     /newEmployee                controllers.EmployeeController.getNewEmployee
 POST    /newEmployee                controllers.EmployeeController.postNewEmployee
+GET     /employee/:id               controllers.EmployeeController.getEmployee(id:Integer)
+GET     /editEmployee/:id           controllers.EmployeeController.getEditEmployee(id:Integer)
+POST    /editEmployee/:id           controllers.EmployeeController.postEditEmployee(id:Integer)
+GET     /changePassword/:id         controllers.EmployeeController.getChangePassword(id:Integer)
+POST    /changePassword/:id         controllers.EmployeeController.postChangePassword(id:Integer)
 
 GET     /customs                    controllers.JobController.getUpdateCustoms
 GET     /newcustoms                 controllers.JobController.getNewCustoms
 GET     /completedcustoms           controllers.JobController.getCompletedCustoms
 GET     /newCustom/:id              controllers.JobController.getNewCustom(id:Integer)
 POST    /newCustom/:id              controllers.JobController.postNewCustom(id:Integer)
-
+GET     /updateCustom/:id           controllers.JobController.getUpdateCustom(id:Integer)
+POST    /updateCustom/:id           controllers.JobController.postUpdateCustom(id:Integer)
+GET     /customdetail/:id           controllers.JobController.getCustomDetail(id:Integer)
+GET     /customhistory/:id          controllers.JobController.getCustomHistory(id:Integer)
 
 GET     /newrepairs                 controllers.JobController.getRepairs
 GET     /newRepair/:id              controllers.JobController.getNewRepair(id:Integer)

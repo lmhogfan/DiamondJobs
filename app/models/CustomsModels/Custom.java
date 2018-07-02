@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,6 +20,7 @@ public class Custom
     private int envelopeNumber;
     private String quote;
     private Integer customStatusId;
+    private BigDecimal totalPrice;
 
     public int getCustomId()
     {
@@ -93,5 +95,15 @@ public class Custom
     public void setCustomStatusId(Integer customStatusId)
     {
         this.customStatusId = customStatusId;
+    }
+
+    public BigDecimal getTotalPrice()
+    {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice)
+    {
+        this.totalPrice = totalPrice;
     }
 }

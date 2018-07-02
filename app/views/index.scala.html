@@ -1,3 +1,4 @@
+@(repairs:List[RepairModels.Repair])
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,48 +7,18 @@
 </head>
 <body>
 @navbar.render
-<h1 class="display-4 text-center">Welcome</h1>
-<div class="container text-center">
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown" type="button" data-toggle="dropdown">Customers
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li><a href="newCustomer">New Customer</a></li>
-            <li><a href="customers">Existing Customer</a></li>
-        </ul>
+<h1 class="display-4 text-center">Dashboard</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-2 text-center border-right border-top">
+            @sidebar.render
+        </div>
+        <div class="col-10">
+            @for(repair <- repairs){
+            @repair.getRepairsId: @repair.getDaysToComplete<br>
+            }
+        </div>
     </div>
-    <br>
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown" type="button" data-toggle="dropdown">Repairs
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li><a href="newrepairs">New Repair</a></li>
-            <li><a href="updaterepairs">Update Repairs</a></li>
-            <li><a href="completedrepairs">Completed Repairs</a></li>
-        </ul>
-    </div>
-    <br>
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown" type="button" data-toggle="dropdown">Customs
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li><a href="../newcustoms">New Custom</a></li>
-            <li><a href="../customs">Update Customs</a></li>
-            <li><a href="../completedcustoms">Completed Customs</a></li>
-        </ul>
-    </div>
-    <br>
-    <a href="employeetools" class="btn btn-primary" role="button">Employees</a>
-    <br>
-    <br>
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown" type="button" data-toggle="dropdown">Manager Tools
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li><a href="../employees">Existing Employees</a></li>
-            <li><a href="../newEmployee">New Employee</a></li>
-        </ul>
-    </div><br>
 </div>
 
 </body>

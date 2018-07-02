@@ -4,6 +4,7 @@
 <head>
     <title>Customer Search</title>
 @bootstrap.render
+    <link rel="stylesheet" href="/assets/stylesheets/jquery.dataTables.min.css">
 </head>
 <body>
 @navbar.render
@@ -14,13 +15,12 @@
             @sidebar.render
         </div>
         <div class="col-10 border">
-            <form method="get">
-                <input type="text" name="searchCriteria" value="@searchCriteria">
-                <input type="submit" value="Search">
-            </form>
-            <table class="table table-hover">
+            <p>Choose customer to view profile:</p>
+            <table class="display" id="test" style="width:100%">
+                <thead>
                 <th>First Name</th><th>Last Name</th><th>Phone Number</th>
-
+                </thead>
+                <tbody>
                 @for(customer <- customers){
                 <tr class='clickable-row' data-href="/customer/@customer.getCustomerId">
                     <td>@customer.getFirstName</td>
@@ -30,12 +30,14 @@
                         @customer.getPhoneAddress</td>
                 </tr>
                 }
-
+                </tbody>
             </table>
         </div>
     </div>
 
 </div>
 <script type="text/javascript" src="assets/javascripts/selectable-table.js"></script>
+<script type="text/javascript" src="/assets/javascripts/dataTables.js"></script>
+
 </body>
 </html>

@@ -1,15 +1,45 @@
-@(employees:List[EmployeeModels.Employee])
+@(employees:List[EmployeeModels.Employee], titles:List[EmployeeModels.EmployeeTitle])
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     @bootstrap.render
     <title>Title</title>
+    <link rel="stylesheet" href="/assets/stylesheets/jquery.dataTables.min.css">
 </head>
+@navbar.render
 <body>
-@for(employee <- employees){
-@employee.getFirstName @employee.getLastName @employee.getUserName
-<br>
-}
+<div class="container">
+    <h1 class="display-4 text-center">Edit Employees</h1>
+    <div class="row">
+        <div class="col-2 text-center border-top border-right">
+            @sidebar.render
+        </div>
+        <div class="col-10 border-top">
+            <table id="test" class="display" style="width:100%">
+                <thead>
+                <th>Employee Name</th><th>E-mail</th><th>Phone Number</th><th>Job Title</th>
+                </thead>
+                <tbody>
+                @for(employee <-employees){
+                <tr class='clickable-row' data-href="employee/@employee.getEmployeeId">
+                    <td>@employee.getFirstName @employee.getLastName</td>
+                    <td>@employee.getEmail</td>
+                    <td>@employee.getPhoneNumber</td>
+                    @for(title <- titles){
+                    @if(employee.getEmployeeTitleId==title.getEmployeeTitleId){
+                    <td>@title.getEmployeeTitleName</td>
+                    }
+                    }
+                </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
+<script type="text/javascript" src="assets/javascripts/selectable-table.js"></script>
+<script type="text/javascript" src="/assets/javascripts/dataTables.js"></script>
+
 </html>
