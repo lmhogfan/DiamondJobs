@@ -20,6 +20,8 @@ libraryDependencies += "org.webjars" % "bootstrap" % "4.1.0"
 
 libraryDependencies += "org.webjars" % "jquery" % "3.3.1"
 
+libraryDependencies += "org.webjars.bowergithub.chartjs" % "chart.js" % "2.7.2"
+
 
 // Test Database
 libraryDependencies += "com.h2database" % "h2" % "1.4.196"

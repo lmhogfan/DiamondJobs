@@ -2,9 +2,11 @@ package controllers;
 
 
 import models.CustomerModels.Customer;
+import models.CustomsModels.CustomsCompletedOnTime;
 import models.EmployeeModels.Employee;
 import models.EmployeeModels.Password;
 import models.RepairModels.Repair;
+import models.RepairModels.RepairsCompletedOnTime;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -13,6 +15,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,10 +37,24 @@ public class HomeController extends ApplicationController
     {
         if(isLoggedIn())
         {
-            String sql="SELECT r FROM Repair r "+
-                    "WHERE r.jobFinished IS NOT NULL";
-            List<Repair> repairs=jpaApi.em().createQuery(sql,Repair.class).getResultList();
-            return ok(views.html.index.render(repairs));
+            String sql="SELECT CASE WHEN DATEDIFF(jobFinished, jobStarted)<= 5 THEN 'Less than 5 days' " +
+                    "WHEN DATEDIFF(jobFinished, jobStarted)>5 THEN 'More than 5 days' END AS completeCategoryName, " +
+                    "COUNT(*) AS completedCount " +
+                    "FROM Repair " +
+                    "WHERE jobFinished IS NOT NULL " +
+                    "GROUP BY 1";
+            List<RepairsCompletedOnTime>repairsCompletedOnTimeList=jpaApi.em()
+                    .createNativeQuery(sql,RepairsCompletedOnTime.class).getResultList();
+
+            String sql2="SELECT CASE WHEN DATEDIFF(jobFinished, jobStarted)<= 5 THEN 'Less than 5 days' " +
+                    "WHEN DATEDIFF(jobFinished, jobStarted)>5 THEN 'More than 5 days' END AS completeCategoryName, " +
+                    "COUNT(*) AS completedCount " +
+                    "FROM Custom " +
+                    "WHERE jobFinished IS NOT NULL " +
+                    "GROUP BY 1";
+            List<CustomsCompletedOnTime>customsCompletedOnTimes=jpaApi.em()
+                    .createNativeQuery(sql2,CustomsCompletedOnTime.class).getResultList();
+            return ok(views.html.index.render(repairsCompletedOnTimeList,customsCompletedOnTimes));
         }
         else
         {

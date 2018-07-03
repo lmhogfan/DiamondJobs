@@ -17,15 +17,15 @@
         <div class="col-10 border-top">
             <form method="post">
                 @CSRF.formField
-                First Name: <input type="text" name="firstName" id="firstName" maxlength="20">
+                First Name: <input type="text" name="firstName" id="firstName" maxlength="20" required>
                 <br>
-                Last Name: <input type="text" name="lastName" id="lastName" maxlength="20">
+                Last Name: <input type="text" name="lastName" id="lastName" maxlength="20" required>
                 <br>
-                Phone Number:<input type="text" name="areaCode" id="areaCode" maxlength="3">
-                <input type="text" name="numPrefix" id="numPrefix" maxlength="3">
-                <input type="text" name="phoneAddress" id="phoneAddress" maxlength="4">
+                Phone Number:<input type="text" name="areaCode" id="areaCode" maxlength="3" required>
+                <input type="text" name="numPrefix" id="numPrefix" maxlength="3" required>
+                <input type="text" name="phoneAddress" id="phoneAddress" maxlength="4" required>
                 <br>
-                Address: <input type="text" name="address" id="address" maxlength="40">
+                Address: <input type="text" name="address" id="address" maxlength="40" required>
                 <br>
                 City/State:
                 <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
@@ -38,9 +38,9 @@
                 <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
                         data-replacement="container1" data-default-label="Select City" disabled>
                 </select>
-                Zip-Code: <input type="text" name="zipCode" maxlength="5">
+                Zip-Code: <input type="text" name="zipCode" maxlength="5" required>
                 <br>
-                E-Mail Address:<input type="text" name="email" id="email" maxlength="40">
+                E-Mail Address:<input type="text" name="email" id="email" maxlength="40" required>
                 <br>
                 Notes: <textarea name="notes" id="notes" maxlength="500"></textarea>
                 <br>

@@ -1,25 +1,70 @@
-@(repairs:List[RepairModels.Repair])
+@(repairs:List[RepairModels.RepairsCompletedOnTime],customs:List[CustomsModels.CustomsCompletedOnTime])
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Title</title>
     @bootstrap.render
+    <script src="/assets/lib/chart.js/Chart.bundle.min.js"></script>
+    <script src="/assets/lib/chart.js/utils.js"></script>
 </head>
 <body>
 @navbar.render
-<h1 class="display-4 text-center">Dashboard</h1>
 <div class="container">
     <div class="row">
         <div class="col-2 text-center border-right border-top">
             @sidebar.render
         </div>
-        <div class="col-10">
-            @for(repair <- repairs){
-            @repair.getRepairsId: @repair.getDaysToComplete<br>
-            }
+        <div class="col-10 text-center border-top">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h3>Completed Repairs</h3>
+                        <p>This chart represents time from start to finish of repair.</p>
+                        <canvas id="repairsComplete" width="925" height="400"></canvas>
+                    </div>
+                    <div class="carousel-item">
+                        <h3>Completed Custom Jobs</h3>
+                        <p>This chart represents time from start to finish of job.</p>
+                        <canvas id="customsComplete" width="925" height="400"></canvas>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-
+<script type="text/javascript" id="chartData"
+        src="assets/javascripts/repairspie.js"
+        data-labels="@for(i <- 0 to repairs.size() - 1){
+ @repairs.get(i).getCompleteCategoryName
+ @if(i < repairs.size() - 1){,}
+}"
+        data-data="@for(i <- 0 to repairs.size() - 1){
+ @repairs.get(i).getCompletedCount
+ @if(i < repairs.size() - 1){,}
+}">
+</script>
+<script type="text/javascript" id="chartData2"
+        src="assets/javascripts/customspie.js"
+        data-labels="@for(i <- 0 to customs.size() - 1){
+ @customs.get(i).getCompleteCategoryName
+ @if(i < customs.size() - 1){,}
+}"
+        data-data="@for(i <- 0 to customs.size() - 1){
+ @customs.get(i).getCompletedCount
+ @if(i < customs.size() - 1){,}
+}">
+</script>
 </body>
 </html>

@@ -121,7 +121,7 @@ public class CustomerController extends Controller
         phoneNumber.setCustomerId(customer.getCustomerId());
         jpaApi.em().persist(phoneNumber);
 
-        return ok("Saved new customer id: "+customer.getCustomerId());
+        return redirect(routes.CustomerController.getCustomer(customer.getCustomerId()));
     }
 
     @Transactional(readOnly = true)

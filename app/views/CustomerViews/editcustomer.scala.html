@@ -18,13 +18,13 @@ number:CustomerModels.PhoneNumber, cities:List[CustomerModels.Cities])
         <div class="col-10 border-top">
             <form method="post">
                 @CSRF.formField
-                First Name: <input type="text" name="firstName" id="firstName" value="@customer.getFirstName" maxlength="20">
+                First Name: <input type="text" name="firstName" id="firstName" pattern="[A-Za-z]{1,}" value="@customer.getFirstName" maxlength="20" required>
                 <br>
-                Last Name: <input type="text" name="lastName" id="lastName" value="@customer.getLastName" maxlength="20">
+                Last Name: <input type="text" name="lastName" id="lastName" pattern="[A-Za-z]{1,}" value="@customer.getLastName" maxlength="20">
                 <br>
-                Phone Number:<input type="text" name="areaCode" id="areaCode" value="@number.getAreaCode" maxlength="3">
-                <input type="text" name="numPrefix" id="numPrefix" value="@number.getNumPrefix" maxlength="3">
-                <input type="text" name="phoneAddress" id="phoneAddress" value="@number.getPhoneAddress" maxlength="4">
+                Phone Number:<input type="text" name="areaCode" id="areaCode" pattern="[0-9]{3}" value="@number.getAreaCode" minlength="3" maxlength="3">
+                <input type="text" name="numPrefix" id="numPrefix" pattern="[0-9]{3}" value="@number.getNumPrefix" minlength="3" maxlength="3">
+                <input type="text" name="phoneAddress" id="phoneAddress" pattern="[0-9]{4}" value="@number.getPhoneAddress" minlength="3" maxlength="4">
                 <br>
                 Address: <input type="text" name="address" id="address" value="@customer.getAddress" maxlength="40">
                 <br>
@@ -50,7 +50,7 @@ number:CustomerModels.PhoneNumber, cities:List[CustomerModels.Cities])
                     }
 
                 </select>
-                Zip-Code: <input type="text" name="zipCode" value="@customer.getZipCode" maxlength="5">
+                Zip-Code: <input type="text" name="zipCode" pattern="[0-9]{5}"value="@customer.getZipCode" minlength="5" maxlength="5">
                 <br>
                 E-Mail Address:<input type="text" name="email" id="email" value="@customer.getEmail" maxlength="40">
                 <br>
