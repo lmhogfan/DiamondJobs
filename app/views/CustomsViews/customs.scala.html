@@ -19,12 +19,13 @@
             Choose a custom job to update:
             <table class="display" id="test" style="width:100%">
                 <thead>
-                <th>Customer</th><th>Description</th><th>Status</th><th>Custom Job Started</th>
+                <th>Customer</th><th>Envelope Number</th><th>Description</th><th>Status</th><th>Custom Job Started</th>
                 </thead>
                 <tbody>
                 @for(custom <- customs){
                 <tr class='clickable-row' data-href='/updateCustom/@custom.getCustomId'>
                     <td>@custom.getFirstName @custom.getLastName</td>
+                    <td>@custom.getEnvelopeNumber</td>
                     <td>@custom.getItemDescription</td>
                     <td>@custom.getCustomStatusName</td>
                     <td>@custom.getJobStarted</td>

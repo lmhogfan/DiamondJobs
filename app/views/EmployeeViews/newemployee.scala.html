@@ -18,30 +18,30 @@
         <div class="col-10 border-top">
             <form method="post">
                 @CSRF.formField
-                User Name:<input type="text" name="userName" maxlength="20"><br>
-                Password:<input type="password" name="password" maxlength="20"><br>
-                Confirm Password:<input type="password" name="confirm" maxlength="20"<br>
-                First Name:<input type="text" name="firstName" maxlength="20"><br>
-                Last Name:<input type="text" name="lastName" maxlength="20"><br>
-                E-mail:<input type="text" name="email" maxlength="40"><br>
-                Phone Number:<input type="text" name="phoneNumber" maxlength="12"><br>
-                Address: <input type="text" name="address" id="address" maxlength="40">
+                User Name:<input type="text" name="userName" maxlength="20" required><br>
+                Password:<input type="password" name="password" maxlength="20" required><br>
+                Confirm Password:<input type="password" name="confirm" maxlength="20" required><br>
+                First Name:<input type="text" name="firstName" maxlength="20" pattern="[A-Za-z]{1,}" required><br>
+                Last Name:<input type="text" name="lastName" maxlength="20" pattern="[A-Za-z]{1,}" required><br>
+                E-mail:<input type="text" name="email" maxlength="40" pattern="[^@@]+@@[^@@]+\.[a-zA-Z]{2,}" required><br>
+                Phone Number:<input type="text" name="phoneNumber" maxlength="12" title="(xxx-xxx-xxxx)" pattern="^\d{3}-\d{3}-\d{4}$" required><br>
+                Address: <input type="text" name="address" id="address" maxlength="40" required>
                 <br>
                 City/State:
                 <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
-                        data-url="newCustomer/cities" data-replacement="container1">
+                        data-url="newCustomer/cities" data-replacement="container1" required>
                     <option value="">Select State</option>
                     @for(state <- states){
                     <option>@state.getStateId</option>
                     }
                 </select>
                 <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
-                        data-replacement="container1" data-default-label="Select City" disabled>
+                        data-replacement="container1" data-default-label="Select City" disabled required>
                 </select>
-                Zip-Code: <input type="text" name="zipCode" maxlength="5">
+                Zip-Code: <input type="text" name="zipCode" maxlength="5" pattern="[0-9]{5}" required>
                 <br>
                 Employee Title:
-                <select name="employeeTitleId">
+                <select name="employeeTitleId" required>
                     @for(employeeTitle <- employeeTitles){
                     <option value="@employeeTitle.getEmployeeTitleId">@employeeTitle.getEmployeeTitleName</option>
                     }

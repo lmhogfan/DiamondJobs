@@ -27,12 +27,13 @@
             Choose a repair to update:
             <table class="display" id="test" style="width:100%">
                 <thead>
-                <th>Customer</th><th>Description</th><th>Status</th><th>Repair Started</th>
+                <th>Customer</th><th>Envelope Number</th><th>Description</th><th>Status</th><th>Repair Started</th>
                 </thead>
                 <tbody>
                 @for(repair <- repairs){
                 <tr class='clickable-row' data-href='/updaterepair/@repair.getRepairsId'>
                     <td>@repair.getFirstName @repair.getLastName</td>
+                    <td>@repair.getEnvelopeNumber</td>
                     <td>@repair.getItemDescription</td>
                     <td>@repair.getRepairStatusName</td>
                     <td>@repair.getJobStarted</td>

@@ -19,17 +19,17 @@
             <form method="post">
                 @CSRF.formField
                 <input type="hidden" name="customerId" value="@customer.getCustomerId">
-                Item Description:<br><textarea maxlength="500" name="itemDescription"></textarea><br>
-                Envelope Number:<br><input type="text" name="envelopeNumber" maxlength="6"><br>
-                Quote:<br><textarea  maxlength="500" name="quote"></textarea><br>
+                Item Description:<br><textarea maxlength="500" name="itemDescription" required></textarea><br>
+                Envelope Number:<br><input type="text" name="envelopeNumber" maxlength="6" required><br>
+                Quote:<br><textarea  maxlength="500" name="quote" required></textarea><br>
                 Job Status:
-                <select name="customStatusCode">
+                <select name="customStatusCode" required>
                     @for(status <- statuses){
                     <option value="@status.getCustomStatusCode">@status.getCustomStatusName</option>
                     }
                 </select><br><br>
                 Employee Username:<br>
-                <select name="username">
+                <select name="username" required>
                     @for(employee <- employees){
                     <option value="@employee.getEmployeeId">@employee.getUserName</option>
                     }

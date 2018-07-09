@@ -19,13 +19,13 @@ employee:EmployeeModels.Employee, cities:List[CustomerModels.Cities])
             <h2>@employee.getFirstName @employee.getLastName</h2>
             <form method="post">
                 @CSRF.formField
-                E-mail:<input type="text" name="email" maxlength="40" value="@employee.getEmail"><br>
-                Phone Number:<input type="text" name="phoneNumber" value="@employee.getPhoneNumber" maxlength="12"><br>
-                Address: <input type="text" name="address" id="address" value="@employee.getAddress" maxlength="40">
+                E-mail:<input type="text" name="email" maxlength="40" pattern="[^@@]+@@[^@@]+\.[a-zA-Z]{2,}" value="@employee.getEmail" required><br>
+                Phone Number:<input type="text" name="phoneNumber" title="(xxx-xxx-xxxx)" pattern="^\d{3}-\d{3}-\d{4}$" value="@employee.getPhoneNumber" maxlength="12" required><br>
+                Address: <input type="text" name="address" minlength="2" id="address" value="@employee.getAddress" maxlength="40" required>
                 <br>
                 City/State:
                 <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
-                        data-url="../newCustomer/cities" data-replacement="container1">
+                        data-url="../newCustomer/cities" data-replacement="container1" required>
                     <option value="">Select State</option>
                     @for(state <- states){
                     @if(state.getStateId==employee.getStateId){
@@ -36,7 +36,7 @@ employee:EmployeeModels.Employee, cities:List[CustomerModels.Cities])
                     }
                 </select>
                 <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
-                        data-replacement="container1" data-default-label="@employee.getCity">
+                        data-replacement="container1" data-default-label="@employee.getCity" required>
                     <option selected="selected" value="@employee.getCity">@employee.getCity</option>
                     @for(city <-cities){
                     @if(employee.getStateId==city.getStateId){
@@ -45,10 +45,10 @@ employee:EmployeeModels.Employee, cities:List[CustomerModels.Cities])
                     }
 
                 </select>
-                Zip-Code: <input type="text" name="zipCode" maxlength="5" value="@employee.getZipCode">
+                Zip-Code: <input type="text" name="zipCode" maxlength="5" value="@employee.getZipCode" pattern="[0-9]{5}" required>
                 <br>
                 Employee Title:
-                <select name="employeeTitleId">
+                <select name="employeeTitleId" required>
                     @for(employeeTitle <- employeeTitles){
                     @if(employeeTitle.getEmployeeTitleId==employee.getEmployeeTitleId){
                     <option value="@employee.getEmployeeTitleId" selected="selected">@employeeTitle.getEmployeeTitleName</option>

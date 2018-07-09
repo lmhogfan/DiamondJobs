@@ -337,7 +337,7 @@ public class JobController extends ApplicationController
         String queryParameter = "%" + searchCriteria + "%";
         String sql = "SELECT NEW models.CustomsModels.CustomUpdate(cu.customId, c.firstName,c.lastName, " +
                 "cu.itemDescription, cu.jobStarted, cs.customStatusCode, csd.customStatusName, cs.employeeId, e.userName, " +
-                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged) " +
+                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged, cu.envelopeNumber) " +
                 "FROM Custom cu " +
                 "JOIN CustomStatus cs ON cu.customStatusId=cs.customStatusId " +
                 "JOIN Customer c ON cu.customerId=c.customerId " +
@@ -432,7 +432,7 @@ public class JobController extends ApplicationController
     {
         String sql = "SELECT NEW models.CustomsModels.CustomUpdate(cu.customId, c.firstName,c.lastName, " +
                 "cu.itemDescription, cu.jobStarted, cs.customStatusCode, csd.customStatusName, cs.employeeId, e.userName, " +
-                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged) " +
+                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged, cu.envelopeNumber) " +
                 "FROM Custom cu " +
                 "JOIN CustomStatus cs ON cu.customStatusId=cs.customStatusId " +
                 "JOIN Customer c ON cu.customerId=c.customerId " +
@@ -449,7 +449,7 @@ public class JobController extends ApplicationController
     {
         String sql = "SELECT NEW models.CustomsModels.CustomUpdate(cu.customId, c.firstName,c.lastName, " +
                 "cu.itemDescription, cu.jobStarted, cs.customStatusCode, csd.customStatusName, cs.employeeId, e.userName, " +
-                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged) " +
+                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged, cu.envelopeNumber) " +
                 "FROM Custom cu " +
                 "JOIN CustomStatus cs ON cu.customStatusId=cs.customStatusId " +
                 "JOIN Customer c ON cu.customerId=c.customerId " +
@@ -542,7 +542,7 @@ public class JobController extends ApplicationController
     {
         String sql = "SELECT NEW models.CustomsModels.CustomUpdate(cu.customId, c.firstName,c.lastName, " +
                 "cu.itemDescription, cu.jobStarted, cs.customStatusCode, csd.customStatusName, cs.employeeId, e.userName, " +
-                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged) " +
+                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged, cu.envelopeNumber) " +
                 "FROM Custom cu " +
                 "JOIN CustomStatus cs ON cu.customStatusId=cs.customStatusId " +
                 "JOIN Customer c ON cu.customerId=c.customerId " +
@@ -570,7 +570,7 @@ public class JobController extends ApplicationController
     {
         String sql = "SELECT NEW models.CustomsModels.CustomUpdate(cu.customId, c.firstName,c.lastName, " +
                 "cu.itemDescription, cu.jobStarted, cs.customStatusCode, csd.customStatusName, cs.employeeId, e.userName, " +
-                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged) " +
+                "cs.notes,cu.quote, cu.jobFinished, cs.statusChanged, cu.envelopeNumber) " +
                 "FROM Custom cu " +
                 "JOIN CustomStatus cs ON cu.customStatusId=cs.customStatusId " +
                 "JOIN Customer c ON cu.customerId=c.customerId " +

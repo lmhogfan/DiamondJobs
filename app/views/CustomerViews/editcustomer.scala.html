@@ -22,15 +22,15 @@ number:CustomerModels.PhoneNumber, cities:List[CustomerModels.Cities])
                 <br>
                 Last Name: <input type="text" name="lastName" id="lastName" pattern="[A-Za-z]{1,}" value="@customer.getLastName" maxlength="20">
                 <br>
-                Phone Number:<input type="text" name="areaCode" id="areaCode" pattern="[0-9]{3}" value="@number.getAreaCode" minlength="3" maxlength="3">
-                <input type="text" name="numPrefix" id="numPrefix" pattern="[0-9]{3}" value="@number.getNumPrefix" minlength="3" maxlength="3">
-                <input type="text" name="phoneAddress" id="phoneAddress" pattern="[0-9]{4}" value="@number.getPhoneAddress" minlength="3" maxlength="4">
+                Phone Number:<input type="text" name="areaCode" id="areaCode" pattern="[0-9]{3}" value="@number.getAreaCode" minlength="3" maxlength="3" required>
+                <input type="text" name="numPrefix" id="numPrefix" pattern="[0-9]{3}" value="@number.getNumPrefix" minlength="3" maxlength="3" required>
+                <input type="text" name="phoneAddress" id="phoneAddress" pattern="[0-9]{4}" value="@number.getPhoneAddress" minlength="3" maxlength="4" required>
                 <br>
-                Address: <input type="text" name="address" id="address" value="@customer.getAddress" maxlength="40">
+                Address: <input type="text" name="address" id="address" value="@customer.getAddress" maxlength="40" required>
                 <br>
                 City/State:
                 <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
-                        data-url="/../newCustomer/cities" data-replacement="container1">
+                        data-url="/../newCustomer/cities" data-replacement="container1" required>
                     <option value="">Select State</option>
                     @for(state <- states){
                     @if(state.getStateId==customer.getStateId){
@@ -41,7 +41,7 @@ number:CustomerModels.PhoneNumber, cities:List[CustomerModels.Cities])
                     }
                 </select>
                 <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
-                        data-replacement="container1" data-default-label="@customer.getCity">
+                        data-replacement="container1" data-default-label="@customer.getCity" required>
                     <option selected="selected" value="@customer.getCity">@customer.getCity</option>
                     @for(city <-cities){
                     @if(customer.getStateId==city.getStateId){
@@ -50,9 +50,9 @@ number:CustomerModels.PhoneNumber, cities:List[CustomerModels.Cities])
                     }
 
                 </select>
-                Zip-Code: <input type="text" name="zipCode" pattern="[0-9]{5}"value="@customer.getZipCode" minlength="5" maxlength="5">
+                Zip-Code: <input type="text" name="zipCode" pattern="[0-9]{5}" value="@customer.getZipCode" minlength="5" maxlength="5" required>
                 <br>
-                E-Mail Address:<input type="text" name="email" id="email" value="@customer.getEmail" maxlength="40">
+                E-Mail Address:<input type="text" name="email" id="email" pattern="[^@@]+@@[^@@]+\.[a-zA-Z]{2,}" value="@customer.getEmail" maxlength="40" required>
                 <br>
                 Notes: <textarea name="notes" id="notes"  maxlength="500">@customer.getNotes</textarea>
                 <br>

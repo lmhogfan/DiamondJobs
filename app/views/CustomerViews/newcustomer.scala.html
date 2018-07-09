@@ -17,30 +17,30 @@
         <div class="col-10 border-top">
             <form method="post">
                 @CSRF.formField
-                First Name: <input type="text" name="firstName" id="firstName" maxlength="20" required>
+                First Name: <input type="text" name="firstName" id="firstName" pattern="[A-Za-z]{1,}" maxlength="20" required>
                 <br>
-                Last Name: <input type="text" name="lastName" id="lastName" maxlength="20" required>
+                Last Name: <input type="text" name="lastName" id="lastName" pattern="[A-Za-z]{1,}" maxlength="20" required>
                 <br>
-                Phone Number:<input type="text" name="areaCode" id="areaCode" maxlength="3" required>
-                <input type="text" name="numPrefix" id="numPrefix" maxlength="3" required>
-                <input type="text" name="phoneAddress" id="phoneAddress" maxlength="4" required>
+                Phone Number:<input type="text" name="areaCode" id="areaCode" pattern="[0-9]{3}" maxlength="3" required>
+                <input type="text" name="numPrefix" id="numPrefix" pattern="[0-9]{3}" maxlength="3" required>
+                <input type="text" name="phoneAddress" id="phoneAddress" pattern="[0-9]{4}" maxlength="4" required>
                 <br>
-                Address: <input type="text" name="address" id="address" maxlength="40" required>
+                Address: <input type="text" name="address" id="address" pattern="[A-Za-z]{1,}" maxlength="40" required>
                 <br>
                 City/State:
                 <select name="stateId" class="cascadingDropDown" data-group="product-1" data-id="stateId" data-target="city"
-                        data-url="newCustomer/cities" data-replacement="container1">
+                        data-url="newCustomer/cities" data-replacement="container1" required>
                     <option value="">Select State</option>
                     @for(state <- states){
                     <option>@state.getStateId</option>
                     }
                 </select>
                 <select name="city" class="cascadingDropDown" data-group="product-1" data-id="city"
-                        data-replacement="container1" data-default-label="Select City" disabled>
+                        data-replacement="container1" data-default-label="Select City" disabled required>
                 </select>
-                Zip-Code: <input type="text" name="zipCode" maxlength="5" required>
+                Zip-Code: <input type="text" name="zipCode" maxlength="5" pattern="[0-9]{5}" required>
                 <br>
-                E-Mail Address:<input type="text" name="email" id="email" maxlength="40" required>
+                E-Mail Address:<input type="text" name="email" id="email" pattern="[^@@]+@@[^@@]+\.[a-zA-Z]{2,}" maxlength="40" required>
                 <br>
                 Notes: <textarea name="notes" id="notes" maxlength="500"></textarea>
                 <br>

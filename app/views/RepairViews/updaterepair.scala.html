@@ -25,7 +25,7 @@
                         <td>@repair.getItemDescription</td>
                         <td>@repair.getJobStarted</td>
                         <td>
-                            <select name="statusId" id="statusId">
+                            <select name="statusId" id="statusId" required>
                                 @for(status <- statuses){
                                 @if(repair.getRepairStatusName == status.getRepairStatusName){
                                 <option value="@status.getRepairStatusCode"
@@ -52,7 +52,7 @@
                 <textarea name="notes" maxlength="500" id="notes"></textarea>
                 <br>
                 Employee Username:<br>
-                <select name="username">
+                <select name="username" required>
                     @for(employee <- employees){
                     <option value="@employee.getEmployeeId">@employee.getUserName</option>
                     }

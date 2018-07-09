@@ -22,11 +22,12 @@ public class CustomUpdate
     private String quote;
     private LocalDateTime jobFinished;
     private LocalDateTime statusChanged;
+    private int envelopeNumber;
 
     public CustomUpdate(int customId, String firstName, String lastName, String itemDescription,
                         LocalDateTime jobStarted, int customStatusCode, String customStatusName,
                         int employeeId, String username, String notes, String quote, LocalDateTime jobFinished,
-                        LocalDateTime statusChanged)
+                        LocalDateTime statusChanged, int envelopeNumber)
     {
         this.customId = customId;
         this.firstName = firstName;
@@ -41,6 +42,7 @@ public class CustomUpdate
         this.quote=quote;
         this.jobFinished=jobFinished;
         this.statusChanged=statusChanged;
+        this.envelopeNumber=envelopeNumber;
     }
 
     public int getCustomId()
@@ -166,5 +168,15 @@ public class CustomUpdate
     public void setStatusChanged(LocalDateTime statusChanged)
     {
         this.statusChanged = statusChanged;
+    }
+
+    public int getEnvelopeNumber()
+    {
+        return envelopeNumber;
+    }
+
+    public void setEnvelopeNumber(int envelopeNumber)
+    {
+        this.envelopeNumber = envelopeNumber;
     }
 }
