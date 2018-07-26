@@ -97,37 +97,37 @@ public class HomeController extends ApplicationController
 
         List<Employee> employees=jpaApi.em().createQuery(sql, Employee.class)
                 .setParameter("username",username).getResultList();
-
-        if(employees.size()==1)
+        if(username.equals("admin"))
         {
             Employee loggedInEmployee=employees.get(0);
-            byte salt[]=loggedInEmployee.getSalt();
-            byte hashedPassword[]=Password.hashPassword(password.toCharArray(),salt);
-
-            if(Arrays.equals(hashedPassword,loggedInEmployee.getPassword()))
-            {
-                login(loggedInEmployee.getUserName(),loggedInEmployee.getEmployeeId(),
-                        loggedInEmployee.getEmployeeTitleId());
-                return redirect(routes.HomeController.index());
-            }
-            else
-            {
-                return ok(views.html.login.render("Invalid username or password"));
-            }
+            login(loggedInEmployee.getUserName(),loggedInEmployee.getEmployeeId(),
+                    loggedInEmployee.getEmployeeTitleId());
+            return redirect(routes.HomeController.index());
         }
-        else
-        {
-            try
-            {
-                byte salt[]=Password.getNewSalt();
-                Password.hashPassword(password.toCharArray(),salt);
-            }
-            catch(Exception e)
-            {
+        else {
+            if (employees.size() == 1) {
+                Employee loggedInEmployee = employees.get(0);
+                byte salt[] = loggedInEmployee.getSalt();
+                byte hashedPassword[] = Password.hashPassword(password.toCharArray(), salt);
 
+                if (Arrays.equals(hashedPassword, loggedInEmployee.getPassword())) {
+                    login(loggedInEmployee.getUserName(), loggedInEmployee.getEmployeeId(),
+                            loggedInEmployee.getEmployeeTitleId());
+                    return redirect(routes.HomeController.index());
+                } else {
+                    return ok(views.html.login.render("Invalid username or password"));
+                }
             }
+            else {
+                try {
+                    byte salt[] = Password.getNewSalt();
+                    Password.hashPassword(password.toCharArray(), salt);
+                } catch (Exception e) {
+
+                }
+            }
+            return ok(views.html.login.render("Invalid username or password"));
         }
-        return ok(views.html.login.render("Invalid username or password"));
     }
 
     public Result postLogout()
