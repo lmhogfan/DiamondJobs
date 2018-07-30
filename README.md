@@ -1,6 +1,6 @@
 [<img src="https://img.shields.io/travis/playframework/play-java-starter-example.svg"/>](https://travis-ci.org/playframework/play-java-starter-example)
 
-# play-java-starter-example
+# Diamond Jobs
 
 This is a starter application that shows how Play works.  Please see the documentation at https://www.playframework.com/documentation/latest/Home for more details.
 
@@ -14,40 +14,42 @@ sbt run
 
 And then go to http://localhost:9000 to see the running web application.
 
-## Controllers
+## Getting Started
 
-There are several demonstration files available in this template.
+It is important to understand that this is a demo version of the application. This application was developed to help a local jewelry store better track jewelry repairs and custom jewelry jobs.
 
-- HomeController.java:
+To access the database, navigate to the application.conf file. On lines 346 and 347, the default.username and default.password should be the same as your database manager.
 
-  Shows how to handle simple HTTP requests.
+To bypass log in to the application, use the username "admin" and leave the password blank. From there you should have full access to the application.
 
-- AsyncController.java:
+## Features
 
-  Shows how to do asynchronous programming when handling a request.
+- Customers
 
-- CountController.java:
+Creating new customers, editing existing customers, creating new jobs, and reviewing past jobs.
 
-  Shows how to inject a component into a controller and use the component when
-  handling requests.
+- Repairs and Custom Jobs
 
-## Components
+Start new jobs, update existing jobs, and view job history.
 
-- Module.java:
+- Employees
 
-  Shows how to use Guice to bind all the components needed by your application.
+Creating new employees, edit existing employees(only if logged in as a store manager), and changing password (only for logged in employee).
 
-- Counter.java:
+- Dynamic Search
 
-  An example of a component that contains state, in this case a simple counter.
+All list contain a dynamic search and sort feature to allow easier and simpler navigation.
 
-- ApplicationTimer.java:
+- AWS Email Notifications
 
-  An example of a component that starts when the application starts and stops
-  when the application stops.
+When a job is marked "Completed Awaiting Pick Up", the option of an automated email appears. Currently, the customers email address must be confirmed through AWS before sending.
 
-## Filters
+## Upcoming Features
 
-- ExampleFilter.java
+- Employee Portal
 
-  A simple filter that adds a header to every response.
+Allow Employees to clock in/out, view and edit time cards, submit time off requests.
+
+- Inventory Management
+
+- Integrative Point of Sale
