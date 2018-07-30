@@ -24,31 +24,19 @@ To bypass log in to the application, use the username "admin" and leave the pass
 
 ## Features
 
-- Customers
+- Customers- Creating new customers, editing existing customers, creating new jobs, and reviewing past jobs.
 
-Creating new customers, editing existing customers, creating new jobs, and reviewing past jobs.
+- Repairs and Custom Job- Start new jobs, update existing jobs, and view job history.
 
-- Repairs and Custom Jobs
+- Employees- Creating new employees, edit existing employees(only if logged in as a store manager), and changing password (only for logged in employee).
 
-Start new jobs, update existing jobs, and view job history.
+- Dynamic Search- All list contain a dynamic search and sort feature to allow easier and simpler navigation.
 
-- Employees
-
-Creating new employees, edit existing employees(only if logged in as a store manager), and changing password (only for logged in employee).
-
-- Dynamic Search
-
-All list contain a dynamic search and sort feature to allow easier and simpler navigation.
-
-- AWS Email Notifications
-
-When a job is marked "Completed Awaiting Pick Up", the option of an automated email appears. Currently, the customers email address must be confirmed through AWS before sending.
+- AWS Email Notifications- When a job is marked "Completed Awaiting Pick Up", the option of an automated email appears. Currently, the customers email address must be confirmed through AWS before sending.
 
 ## Upcoming Features
 
-- Employee Portal
-
-Allow Employees to clock in/out, view and edit time cards, submit time off requests.
+- Employee Portal- Allow Employees to clock in/out, view and edit time cards, submit time off requests.
 
 - Inventory Management
 
